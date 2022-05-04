@@ -243,21 +243,44 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="Hexo新建一个博客"><a href="#Hexo新建一个博客" class="headerlink" title="Hexo新建一个博客"></a>Hexo新建一个博客</h1><h2 id="1-首先配置Hexo（准备工作）"><a href="#1-首先配置Hexo（准备工作）" class="headerlink" title="1. 首先配置Hexo（准备工作）"></a>1. 首先配置Hexo（准备工作）</h2><h3 id="1-1-创建项目"><a href="#1-1-创建项目" class="headerlink" title="1.1 创建项目"></a>1.1 创建项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init 文件名（例如GithubPage）</span><br></pre></td></tr></table></figure>
+    <h2 id="1-首先配置Hexo（准备工作）"><a href="#1-首先配置Hexo（准备工作）" class="headerlink" title="1. 首先配置Hexo（准备工作）"></a>1. 首先配置Hexo（准备工作）</h2><h3 id="1-1-创建项目"><a href="#1-1-创建项目" class="headerlink" title="1.1 创建项目"></a>1.1 创建项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init &quot;文件名&quot;</span><br></pre></td></tr></table></figure>
 
+<p>例如：hexo init “GithubPage”</p>
 <h3 id="1-2-安装依赖"><a href="#1-2-安装依赖" class="headerlink" title="1.2 安装依赖"></a>1.2 安装依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
 
 <h3 id="1-3-进入项目"><a href="#1-3-进入项目" class="headerlink" title="1.3 进入项目"></a>1.3 进入项目</h3><p>右键GithubPage文件夹，选择Git Bash Here</p>
 <p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202205041500981.png" alt="image-20220504145801835"></p>
 <p>修改博客根目录中_config.yml文件的配置项post_asset_folder为true（方便后面图片的显示）</p>
 <h2 id="2-新建一篇文章"><a href="#2-新建一篇文章" class="headerlink" title="2. 新建一篇文章"></a>2. 新建一篇文章</h2><p>创建一篇新文章或者新的页面</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 博客名字（例如hexo new 我的第一篇博客）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;博客名字&quot;</span><br></pre></td></tr></table></figure>
 
+<p>例如：hexo new “我的第一篇博客”</p>
 <p>会在博客文件夹中的source&#x2F;_posts&#x2F;目录下生成一个md文件和一个文件夹（用来存放图片的）</p>
 <p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202205041506894.png" alt="image-20220504150603870"></p>
 <p>我的第一篇博客.md文件的内容</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 我的第一篇博客</span><br><span class="line">date: 2022-05-04 10:54:50</span><br><span class="line"><span class="section">tags:</span></span><br><span class="line"><span class="section">---</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 最近哪都在下雨，下雨的时候就想待在床上，玩着手机，看着电视。</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 1. 生活</span></span><br><span class="line"></span><br><span class="line">下雨最想干的事</span><br><span class="line"></span><br><span class="line"><span class="code">```</span></span><br><span class="line"><span class="code">console.log(&quot;啊~真好&quot;)</span></span><br><span class="line"><span class="code">```</span></span><br><span class="line"></span><br><span class="line">![<span class="string">下雨时的美好生活</span>](<span class="link">./我的第一篇博客/raining.png</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h3 id="3-本地查看效果"><a href="#3-本地查看效果" class="headerlink" title="3. 本地查看效果"></a>3. 本地查看效果</h3><p>生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>删除静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>如果发生了一些错误，可以先删除静态文件，然后再重新生成。</p>
+<p>生成静态文件之后，便要启动本地端口。然后访问命令行返回的地址便能在本地访问到博客了。<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-上传到GitHub"><a href="#4-上传到GitHub" class="headerlink" title="4. 上传到GitHub"></a>4. 上传到GitHub</h3><p>（1）删除已有的静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<p>（2）重新生成静态文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p>（3）重新部署</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>如果部署失败，可能是因为网络连接问题，可以尝试一下VPN。</p>
+<p>部署需要稍等一段时间后刷新网页，才会发现生效。</p>
 
     
 
@@ -274,176 +297,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2022/05/04/hexo%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/05/04/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" target="_blank">我的第一篇博客</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/05/04/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-        <time datetime="2022-05-04T02:54:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <blockquote>
-<p>最近哪都在下雨，下雨的时候就想待在床上，玩着手机，看着电视。</p>
-</blockquote>
-<h2 id="1-生活"><a href="#1-生活" class="headerlink" title="1. 生活"></a>1. 生活</h2><p>下雨最想干的事</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&quot;啊~真好&quot;)</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/./%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/raining.png" alt="下雨时的美好生活"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/05/04/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/05/04/hello-world/" target="_blank">Hello World</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/05/04/hello-world/" class="archive-article-date">
-        <time datetime="2022-05-04T02:09:13.129Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-05-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/05/04/hello-world/">展开全文 >></a>
     </p>
     
 
