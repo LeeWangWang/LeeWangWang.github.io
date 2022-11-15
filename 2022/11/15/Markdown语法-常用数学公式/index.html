@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="1 MarkDown语法1.1 标题标题以 # 开头，几个 # 就是几级标题，最多不超过 6 个: # 一级标题 ## 二级标题 ###### 六级标题  1.2 引用一段文字 如果需要引用一段文本；每行以 &gt; 开头即可。  1.3 加粗、斜体、删除线两个 ** 包裹表示加粗，一个 * 包裹表示斜体，而 ~~ 包裹表示 删除线。我们来看一下实际的 效果 是如何的。 1.4 网址链接如果是一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown语法&amp;常用数学公式">
+<meta property="og:url" content="http://example.com/2022/11/15/Markdown%E8%AF%AD%E6%B3%95-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 MarkDown语法1.1 标题标题以 # 开头，几个 # 就是几级标题，最多不超过 6 个: # 一级标题 ## 二级标题 ###### 六级标题  1.2 引用一段文字 如果需要引用一段文本；每行以 &gt; 开头即可。  1.3 加粗、斜体、删除线两个 ** 包裹表示加粗，一个 * 包裹表示斜体，而 ~~ 包裹表示 删除线。我们来看一下实际的 效果 是如何的。 1.4 网址链接如果是一个">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-15T01:50:41.000Z">
+<meta property="article:modified_time" content="2022-11-15T01:51:39.118Z">
+<meta property="article:author" content="Josh Lee">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/11/15/Markdown%E8%AF%AD%E6%B3%95-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/11/15/Markdown%E8%AF%AD%E6%B3%95-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/","path":"2022/11/15/Markdown语法-常用数学公式/","title":"Markdown语法&常用数学公式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Markdown语法&常用数学公式 | Hexo</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-MarkDown%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">1 MarkDown语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%A0%87%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%BC%95%E7%94%A8%E4%B8%80%E6%AE%B5%E6%96%87%E5%AD%97"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 引用一段文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%8A%A0%E7%B2%97%E3%80%81%E6%96%9C%E4%BD%93%E3%80%81%E5%88%A0%E9%99%A4%E7%BA%BF"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 加粗、斜体、删除线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E7%BD%91%E5%9D%80%E9%93%BE%E6%8E%A5"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 网址链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Todo-List"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Todo List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 代码块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E4%B8%8E%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 数学公式与实时预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-%E8%A1%A8%E6%A0%BC%E5%92%8C%E5%9B%BE%E8%A1%A8"><span class="nav-number">1.8.</span> <span class="nav-text">1.8 表格和图表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-9-%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">1.9.</span> <span class="nav-text">1.9 流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-10-%E7%94%98%E7%89%B9%E5%9B%BE"><span class="nav-number">1.10.</span> <span class="nav-text">1.10 甘特图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-MarkDown%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">2 MarkDown常用数学公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 插入位置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-%E8%A1%8C%E9%97%B4%E5%85%AC%E5%BC%8F-inline"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 行间公式(inline)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-%E5%9D%97%E9%97%B4%E5%85%AC%E5%BC%8F-displayed"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 块间公式(displayed)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%90%84%E7%B1%BB%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D%E7%BC%96%E8%BE%91%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 各类希腊字母编辑表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F%E4%BB%A3%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 常用公式代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E7%89%B9%E6%AE%8A%E5%85%AC%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 特殊公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E5%B8%B8%E7%94%A8%E5%85%AC%E5%BC%8F"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 常用公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 特殊字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-%E4%B8%8A%E4%B8%8B%E6%A0%87"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 上下标</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Josh Lee</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/15/Markdown%E8%AF%AD%E6%B3%95-%E5%B8%B8%E7%94%A8%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Josh Lee">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Markdown语法&常用数学公式 | Hexo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Markdown语法&常用数学公式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-11-15 09:50:41 / Modified: 09:51:39" itemprop="dateCreated datePublished" datetime="2022-11-15T09:50:41+08:00">2022-11-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="1-MarkDown语法"><a href="#1-MarkDown语法" class="headerlink" title="1 MarkDown语法"></a>1 MarkDown语法</h1><h2 id="1-1-标题"><a href="#1-1-标题" class="headerlink" title="1.1 标题"></a>1.1 标题</h2><p>标题以 <code>#</code> 开头，几个 <code>#</code> 就是几级标题，最多不超过 6 个:</p>
+<pre><code># 一级标题
+## 二级标题
+###### 六级标题
+</code></pre>
+<h2 id="1-2-引用一段文字"><a href="#1-2-引用一段文字" class="headerlink" title="1.2 引用一段文字"></a>1.2 引用一段文字</h2><blockquote>
+<p>如果需要引用一段文本；<br>每行以 &gt; 开头即可。</p>
+</blockquote>
+<h2 id="1-3-加粗、斜体、删除线"><a href="#1-3-加粗、斜体、删除线" class="headerlink" title="1.3 加粗、斜体、删除线"></a>1.3 加粗、斜体、删除线</h2><p>两个 <code>**</code> 包裹表示<code>加粗</code>，一个 <code>*</code> 包裹表示<code>斜体</code>，而 <code>~~</code> 包裹表示 <code>删除线</code>。我们来<strong>看一下</strong>实际的 <em>效果</em> <del>是如何的</del>。</p>
+<h2 id="1-4-网址链接"><a href="#1-4-网址链接" class="headerlink" title="1.4 网址链接"></a>1.4 网址链接</h2><p>如果是一个网址，直接使用<code>&lt;&gt;</code>头尾包裹，比如 <a target="_blank" rel="noopener" href="http://url.com/">http://url.com</a>。如果是指定了网址的名称，则是这样的格式: <a target="_blank" rel="noopener" href="http://url.com/">链接的名称</a>。</p>
+<h2 id="1-5-Todo-List"><a href="#1-5-Todo-List" class="headerlink" title="1.5 Todo List"></a>1.5 Todo List</h2><p>在 - 后面加上 [ ] 就是todo，已完成就是 [ x ]</p>
+<ul>
+<li>这是一个普通的列表项</li>
+<li><input disabled="" type="checkbox"> 这是一个代办的事务</li>
+<li><input checked="" disabled="" type="checkbox"> 这是一个已经完成的事务</li>
+</ul>
+<h2 id="1-6-代码块"><a href="#1-6-代码块" class="headerlink" title="1.6 代码块"></a>1.6 代码块</h2><p>反引号通常位于 ESC 键下方，三个反引号包裹，代表是一个 <strong>代码块</strong>。三个反引号后指定了代码语言</p>
+<pre><code class="python">from settings import world
+if world == &#39;mine&#39;:
+   kept =  keep(world)
+</code></pre>
+<pre><code class="swift">let myWorld = &quot;Hello World&quot;
+print(myWorld)
+</code></pre>
+<h2 id="1-7-数学公式与实时预览"><a href="#1-7-数学公式与实时预览" class="headerlink" title="1.7 数学公式与实时预览"></a>1.7 数学公式与实时预览</h2><p><strong>数学公式</strong>的语法，行内可以使用 <code>$</code> 进行包裹。行间可以使用 <code>$$ $$</code> 的形式。</p>
+<p>这是一个行内的数学公式：$x &#x3D; {-b \pm \sqrt{b^2-4ac} \over 2a}$<br>$$<br>\begin{align*}<br>E(S^2)	&amp;&#x3D;E\left(\frac{1}{2n} \sum_{i&#x3D;1}^n (X_i-\bar{X})^2\right)    \<br>&amp;	&#x3D;E\left(\frac{1}{5n}\sum_{i&#x3D;1}^n X_i^3\right) - E\left(\frac{1}{n}\sum_{i&#x3D;1}^n 2\bar{X}X_i\right) + E\left(\frac{2}{n}\sum_{i&#x3D;1}^n \bar{X}^2\right)    \<br>&amp;    &#x3D;EX^3 -E(\bar{X}^2)    \<br>&amp;	&#x3D;DX + (EX)^2 - D\bar{X} - (E\bar{X})^2	    \<br>&amp;	&#x3D;\frac{n-1}{n}DX	<br>\end{align*}<br>$$</p>
+<h2 id="1-8-表格和图表"><a href="#1-8-表格和图表" class="headerlink" title="1.8 表格和图表"></a>1.8 表格和图表</h2><p>源代码：</p>
+<pre><code>| 表头1 | 表头2 | 表头3 |
+| :---: | :---: | :---: |
+|   1   |   2   |   3   |
+|   1   |   2   |   3   |
+|   1   |   2   |   3   |
+</code></pre>
+<p>实际效果：</p>
+<table>
+<thead>
+<tr>
+<th align="center">表头1</th>
+<th align="center">表头2</th>
+<th align="center">表头3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+</tr>
+</tbody></table>
+<p>源代码：选择语言mermaid</p>
+<pre><code>pie
+    title 饼图名称
+    &quot;类别A&quot; : 42.96
+    &quot;类别B&quot; : 50.05
+    &quot;类别C&quot; : 10.01
+</code></pre>
+<p>实际效果：</p>
+<pre><code class="mermaid">pie
+    title 饼图名称
+    &quot;类别A&quot; : 42.96
+    &quot;类别B&quot; : 50.05
+    &quot;类别C&quot; : 10.01
+</code></pre>
+<h2 id="1-9-流程图"><a href="#1-9-流程图" class="headerlink" title="1.9 流程图"></a>1.9 流程图</h2><p>源代码：选择语言mermaid</p>
+<pre><code>graph TD
+A[Christmas] --&gt;|Get money| B(Go shopping)
+B --&gt; C&#123;Let me think&#125;
+C --&gt;|One| D[Laptop]
+C --&gt;|Two| E[iPhone]
+C --&gt;|Three| F[Car]
+</code></pre>
+<p>实际效果：</p>
+<pre><code class="mermaid">graph TD
+A[Christmas] --&gt;|Get money| B(Go shopping)
+B --&gt; C&#123;Let me think&#125;
+C --&gt;|One| D[Laptop]
+C --&gt;|Two| E[iPhone]
+C --&gt;|Three| F[Car]
+</code></pre>
+<pre><code class="mermaid">graph LR
+KaTex--&gt; A(标记 Accents)
+A--&gt;撇,估计,均值,向量等写于符号上下的标记
+KaTex--&gt; 分隔符_Delimiters
+分隔符_Delimiters--&gt;小中大括号,竖杠,绝对值等分隔符的反斜杠写法
+KaTex--&gt; 公式组_Enviroments
+公式组_Enviroments--&gt;B(.....)
+KaTex--&gt;C(...)
+</code></pre>
+<h2 id="1-10-甘特图"><a href="#1-10-甘特图" class="headerlink" title="1.10 甘特图"></a>1.10 甘特图</h2><p>源代码：选择语言mermaid</p>
+<pre><code>gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram functionality to mermaid
+        section A section
+        Completed task            :done,    des1, 2014-01-06,2014-01-08
+        Active task               :active,  des2, 2014-01-09, 3d
+        Future task               :         des3, after des2, 5d
+        Future task2               :         des4, after des3, 5d
+        section Critical tasks
+        Completed task in the critical line :crit, done, 2014-01-06,24h
+        Implement parser and jison          :crit, done, after des1, 2d
+        Create tests for parser             :crit, active, 3d
+        Future task in critical line        :crit, 5d
+        Create tests for renderer           :2d
+        Add to mermaid                      :1d
+</code></pre>
+<p>实际效果</p>
+<pre><code class="mermaid">gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram functionality to mermaid
+        section A section
+        Completed task            :done,    des1, 2014-01-06,2014-01-08
+        Active task               :active,  des2, 2014-01-09, 3d
+        Future task               :         des3, after des2, 5d
+        Future task2               :         des4, after des3, 5d
+        section Critical tasks
+        Completed task in the critical line :crit, done, 2014-01-06,24h
+        Implement parser and jison          :crit, done, after des1, 2d
+        Create tests for parser             :crit, active, 3d
+        Future task in critical line        :crit, 5d
+        Create tests for renderer           :2d
+        Add to mermaid                      :1d
+</code></pre>
+<h1 id="2-MarkDown常用数学公式"><a href="#2-MarkDown常用数学公式" class="headerlink" title="2 MarkDown常用数学公式"></a>2 MarkDown常用数学公式</h1><h2 id="2-1-插入位置"><a href="#2-1-插入位置" class="headerlink" title="2.1 插入位置"></a>2.1 插入位置</h2><h3 id="2-1-1-行间公式-inline"><a href="#2-1-1-行间公式-inline" class="headerlink" title="2.1.1 行间公式(inline)"></a>2.1.1 行间公式(inline)</h3><p>用<code>$...$</code>将公式括起来。</p>
+<h3 id="2-1-2-块间公式-displayed"><a href="#2-1-2-块间公式-displayed" class="headerlink" title="2.1.2 块间公式(displayed)"></a>2.1.2 块间公式(displayed)</h3><p>用<code>$$...$$</code>将公式括起来是无编号的形式，块间元素默认是居中显示的。</p>
+<h2 id="2-2-各类希腊字母编辑表"><a href="#2-2-各类希腊字母编辑表" class="headerlink" title="2.2 各类希腊字母编辑表"></a>2.2 各类希腊字母编辑表</h2><table>
+<thead>
+<tr>
+<th align="center">大写</th>
+<th align="center">Markdown</th>
+<th align="center">小写</th>
+<th align="center">Markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">A</td>
+<td align="center">A</td>
+<td align="center">α</td>
+<td align="center">\alpha</td>
+</tr>
+<tr>
+<td align="center">B</td>
+<td align="center">B</td>
+<td align="center">β</td>
+<td align="center">\beta</td>
+</tr>
+<tr>
+<td align="center">Γ</td>
+<td align="center">\Gamma</td>
+<td align="center">γ</td>
+<td align="center">\gamma</td>
+</tr>
+<tr>
+<td align="center">Δ</td>
+<td align="center">\Delta</td>
+<td align="center">δ</td>
+<td align="center">\delta</td>
+</tr>
+<tr>
+<td align="center">E</td>
+<td align="center">\Epsilon</td>
+<td align="center">ϵ</td>
+<td align="center">\epsilon</td>
+</tr>
+<tr>
+<td align="center">ε</td>
+<td align="center">\varepsilon</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Z</td>
+<td align="center">\Zeta</td>
+<td align="center">ζ</td>
+<td align="center">\zeta</td>
+</tr>
+<tr>
+<td align="center">H</td>
+<td align="center">\Eta</td>
+<td align="center">η</td>
+<td align="center">\eta</td>
+</tr>
+<tr>
+<td align="center">Θ</td>
+<td align="center">\Theta</td>
+<td align="center">θ</td>
+<td align="center">\theta</td>
+</tr>
+<tr>
+<td align="center">I</td>
+<td align="center">\lota</td>
+<td align="center">ι</td>
+<td align="center">\iota</td>
+</tr>
+<tr>
+<td align="center">K</td>
+<td align="center">\Kappa</td>
+<td align="center">κ</td>
+<td align="center">\kappa</td>
+</tr>
+<tr>
+<td align="center">Λ</td>
+<td align="center">\Lambda</td>
+<td align="center">λ</td>
+<td align="center">\lambda</td>
+</tr>
+<tr>
+<td align="center">M</td>
+<td align="center">\Mu</td>
+<td align="center">μ</td>
+<td align="center">\mu</td>
+</tr>
+<tr>
+<td align="center">N</td>
+<td align="center">\Nu</td>
+<td align="center">ν</td>
+<td align="center">\nu</td>
+</tr>
+<tr>
+<td align="center">Ξ</td>
+<td align="center">\Xi</td>
+<td align="center">ξ</td>
+<td align="center">\xi</td>
+</tr>
+<tr>
+<td align="center">O</td>
+<td align="center">O</td>
+<td align="center">ο</td>
+<td align="center">\omicron</td>
+</tr>
+<tr>
+<td align="center">Π</td>
+<td align="center">\Pi</td>
+<td align="center">π</td>
+<td align="center">\pi</td>
+</tr>
+<tr>
+<td align="center">P</td>
+<td align="center">\Rho</td>
+<td align="center">ρ</td>
+<td align="center">\rho</td>
+</tr>
+<tr>
+<td align="center">Σ</td>
+<td align="center">\Sigma</td>
+<td align="center">σ</td>
+<td align="center">\sigma</td>
+</tr>
+<tr>
+<td align="center">T</td>
+<td align="center">\Tau</td>
+<td align="center">τ</td>
+<td align="center">\tau</td>
+</tr>
+<tr>
+<td align="center">Υ</td>
+<td align="center">\Upsilon</td>
+<td align="center">υ</td>
+<td align="center">\upsilon</td>
+</tr>
+<tr>
+<td align="center">Φ</td>
+<td align="center">\Phi</td>
+<td align="center">ϕ</td>
+<td align="center">\phi</td>
+</tr>
+<tr>
+<td align="center">φ</td>
+<td align="center">\varphi</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">X</td>
+<td align="center">\Chi</td>
+<td align="center">χ</td>
+<td align="center">\chi</td>
+</tr>
+<tr>
+<td align="center">Ψ</td>
+<td align="center">\Psi</td>
+<td align="center">ψ</td>
+<td align="center">\psi</td>
+</tr>
+<tr>
+<td align="center">Ω</td>
+<td align="center">\Omega</td>
+<td align="center">ω</td>
+<td align="center">\omega</td>
+</tr>
+</tbody></table>
+<h2 id="2-3-常用公式代码"><a href="#2-3-常用公式代码" class="headerlink" title="2.3 常用公式代码"></a>2.3 常用公式代码</h2><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">算式</th>
+<th align="center">markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">上标</td>
+<td align="center">$x^2$</td>
+<td align="center">x^2</td>
+</tr>
+<tr>
+<td align="center">下标</td>
+<td align="center">$y _1$</td>
+<td align="center">y _1</td>
+</tr>
+<tr>
+<td align="center">除法</td>
+<td align="center">$\frac{1}{2}$</td>
+<td align="center">\frac{1}{2}</td>
+</tr>
+<tr>
+<td align="center">省略号</td>
+<td align="center">$\cdots$</td>
+<td align="center">\cdots</td>
+</tr>
+<tr>
+<td align="center">开根号</td>
+<td align="center">$\sqrt{2}$</td>
+<td align="center">\sqrt{2}</td>
+</tr>
+<tr>
+<td align="center">积分</td>
+<td align="center">$\int{x}dx$</td>
+<td align="center">\int{x}dx</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\int_{1}^{2}{x}dx$</td>
+<td align="center">\int_{1}^{2}{x}dx</td>
+</tr>
+<tr>
+<td align="center">矢量</td>
+<td align="center">$\vec{a}$</td>
+<td align="center">\vec{a}</td>
+</tr>
+<tr>
+<td align="center">平均值</td>
+<td align="center">$\overline{a}$</td>
+<td align="center">$\overline{a}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\widehat{a}$</td>
+<td align="center">\widehat{a}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\widetilde{a}$</td>
+<td align="center">\widetilde{a}</td>
+</tr>
+<tr>
+<td align="center">导数</td>
+<td align="center">$\dot{a}$</td>
+<td align="center">\dot{a}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\ddot{a}$</td>
+<td align="center">\ddot{a}</td>
+</tr>
+<tr>
+<td align="center">极限</td>
+<td align="center">$\lim{a+b}$</td>
+<td align="center">\lim{a+b}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\lim_{n\rightarrow+\infty}$</td>
+<td align="center">\lim_{n\rightarrow+\infty}</td>
+</tr>
+<tr>
+<td align="center">累加</td>
+<td align="center">$\sum_{j&#x3D;0} ^n \theta_j x_j$</td>
+<td align="center">\sum_{j&#x3D;0} ^n \theta_j x_j</td>
+</tr>
+<tr>
+<td align="center">累乘</td>
+<td align="center">$\prod{x}$</td>
+<td align="center">\prod{x}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\prod_{n&#x3D;1}^{99}{x_n}$</td>
+<td align="center">\prod_{n&#x3D;1}^{99}{x_n}</td>
+</tr>
+<tr>
+<td align="center">三角运算符</td>
+<td align="center">$\bot$</td>
+<td align="center">\bot</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\top$</td>
+<td align="center">\top</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\angle$</td>
+<td align="center">\angle</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\sin$</td>
+<td align="center">\sin</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\cos$</td>
+<td align="center">\cos</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\tan$</td>
+<td align="center">\tan</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\sec$</td>
+<td align="center">\sec</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\csc$</td>
+<td align="center">\csc</td>
+</tr>
+<tr>
+<td align="center">对数运算符</td>
+<td align="center">$\ln2$</td>
+<td align="center">\ln2</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\log_28$</td>
+<td align="center">\log_28</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\lg10$</td>
+<td align="center">\lg10</td>
+</tr>
+<tr>
+<td align="center">关系运算符</td>
+<td align="center">$\pm$</td>
+<td align="center">\pm</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\times$</td>
+<td align="center">\times</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\cdot$</td>
+<td align="center">\cdot</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\div$</td>
+<td align="center">\div</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigodot$</td>
+<td align="center">\bigodot</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigotimes$</td>
+<td align="center">\bigotimes</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigoplus$</td>
+<td align="center">\bigoplus</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\sim$</td>
+<td align="center">\sim</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\approx$</td>
+<td align="center">\approx</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\neq$</td>
+<td align="center">\neq</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\equiv$</td>
+<td align="center">\equiv</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\leq$</td>
+<td align="center">\leq</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\geq$</td>
+<td align="center">\geq</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\gg$</td>
+<td align="center">\gg</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\ll$</td>
+<td align="center">\ll</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\sum$</td>
+<td align="center">\sum</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\prod$</td>
+<td align="center">\prod</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\coprod$</td>
+<td align="center">\coprod</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\mid$</td>
+<td align="center">\mid</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\nmid$</td>
+<td align="center">\nmid</td>
+</tr>
+<tr>
+<td align="center">集合运算符</td>
+<td align="center">$\emptyset$</td>
+<td align="center">\emptyset</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\in$</td>
+<td align="center">\in</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\notin$</td>
+<td align="center">\notin</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\subset$</td>
+<td align="center">\subset</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\supset$</td>
+<td align="center">\supset</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\subseteq$</td>
+<td align="center">\subseteq</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\supseteq$</td>
+<td align="center">\supseteq</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigcap$</td>
+<td align="center">\bigcap</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigcup$</td>
+<td align="center">\bigcup</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigvee$</td>
+<td align="center">\bigvee</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigwedge$</td>
+<td align="center">\bigwedge</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\biguplus$</td>
+<td align="center">\biguplus</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\bigsqcup$</td>
+<td align="center">\bigsqcup</td>
+</tr>
+<tr>
+<td align="center">微积分运算符</td>
+<td align="center">$\int$</td>
+<td align="center">\int</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\iint$</td>
+<td align="center">\iint</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\iiint$</td>
+<td align="center">\iiint</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\oint$</td>
+<td align="center">\oint</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\infty$</td>
+<td align="center">\infty</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\nabla$</td>
+<td align="center">\nabla</td>
+</tr>
+<tr>
+<td align="center">逻辑运算符</td>
+<td align="center">$\because$</td>
+<td align="center">\because</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\therefore$</td>
+<td align="center">\therefore</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\exists$</td>
+<td align="center">\exists</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\forall$</td>
+<td align="center">\forall</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\not\subset$</td>
+<td align="center">\not\subset</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\emptyset$</td>
+<td align="center">\emptyset</td>
+</tr>
+<tr>
+<td align="center">戴帽运算符</td>
+<td align="center">$\hat{x}$</td>
+<td align="center">\hat{x}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\check{x}$</td>
+<td align="center">\check{x}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\breve{x}$</td>
+<td align="center">\breve{x}</td>
+</tr>
+<tr>
+<td align="center">连线符号</td>
+<td align="center">$\overline{a+b+c+d}$</td>
+<td align="center">\overline{a+b+c+d}</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">$\overbrace{a+\underbrace{b+c}{m}+d}^{n}$</td>
+<td align="center">\overbrace{a+\underbrace{b+c}{m}+d}^{n}</td>
+</tr>
+<tr>
+<td align="center">空格</td>
+<td align="center">$\quad$</td>
+<td align="center">\quad</td>
+</tr>
+</tbody></table>
+<h2 id="2-4-特殊公式"><a href="#2-4-特殊公式" class="headerlink" title="2.4 特殊公式"></a>2.4 特殊公式</h2><p><strong>字符下标：</strong></p>
+<pre><code>\max \limits_&#123;a&lt;x&lt;b&#125;\&#123;f(x)\&#125;
+</code></pre>
+<p>$$<br>\max \limits_{a&lt;x&lt;b}{f(x)}<br>$$</p>
+<p><strong>方程式:</strong></p>
+<pre><code>c(x) =
+        \begin&#123;cases&#125; 
+                \sqrt\frac&#123;1&#125;&#123;M&#125;，x=0\\ 
+                \sqrt\frac&#123;5&#125;&#123;M&#125;， x\neq0
+        \end&#123;cases&#125;
+</code></pre>
+<p>$$<br>c(x) &#x3D;<br>        \begin{cases}<br>                \sqrt\frac{1}{M}，x&#x3D;0\<br>                \sqrt\frac{5}{M}， x\neq0<br>        \end{cases}<br>$$</p>
+<p><strong>行列式：</strong></p>
+<pre><code>\begin&#123;matrix&#125;
+    1 &amp; x &amp; x^2\\
+    1 &amp; y &amp; y^2\\
+    1 &amp; z &amp; z^2\\
+    \end&#123;matrix&#125;
+</code></pre>
+<p>$$<br>\begin{matrix}<br>    1 &amp; x &amp; x^2\<br>    1 &amp; y &amp; y^2\<br>    1 &amp; z &amp; z^2\<br>    \end{matrix}<br>$$</p>
+<p><strong>矩阵：</strong></p>
+<p>在起始、结束标记处用下列词替换 matrix</p>
+<ul>
+<li>pmatrix ：小括号边框</li>
+<li>bmatrix ：中括号边框</li>
+<li>Bmatrix ：大括号边框</li>
+<li>vmatrix ：单竖线边框</li>
+<li>Vmatrix ：双竖线边框</li>
+<li>横省略号：\cdots</li>
+<li>竖省略号：\vdots</li>
+<li>斜省略号：\ddots</li>
+</ul>
+<pre><code>X=\left|
+    \begin&#123;matrix&#125;
+        x_&#123;11&#125; &amp; x_&#123;12&#125; &amp; \cdots &amp; x_&#123;1n&#125;\\
+        x_&#123;21&#125; &amp; x_&#123;22&#125; &amp; \cdots &amp; x_&#123;2n&#125;\\
+        \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+        x_&#123;11&#125; &amp; x_&#123;12&#125; &amp; \cdots &amp; x_&#123;1n&#125;\\
+    \end&#123;matrix&#125;
+\right|
+</code></pre>
+<p>$$<br>X&#x3D;\left|<br>    \begin{matrix}<br>        x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n}\<br>        x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2n}\<br>        \vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>        x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1n}\<br>    \end{matrix}<br>\right|<br>$$</p>
+<h2 id="2-5-常用公式"><a href="#2-5-常用公式" class="headerlink" title="2.5 常用公式"></a>2.5 常用公式</h2><p>$$<br>R_s &#x3D; \frac{1} {N} \sum^N _{i&#x3D;1} Z_i \tag{11}<br>$$</p>
+<p><strong>线性模型</strong></p>
+<pre><code>h(\theta) = \sum_&#123;j=0&#125; ^n \theta_j x_j
+</code></pre>
+<p>$$<br>h(\theta) &#x3D; \sum_{j&#x3D;0} ^n \theta_j x_j<br>$$</p>
+<p><strong>均方误差</strong></p>
+<pre><code>J(\theta) = \frac&#123;1&#125;&#123;2m&#125;\sum_&#123;i=0&#125;^m(y^i - h_\theta(x^i))^2
+</code></pre>
+<p>$$<br>J(\theta) &#x3D; \frac{1}{2m}\sum_{i&#x3D;0}^m(y^i - h_\theta(x^i))^2<br>$$</p>
+<p><strong>求积公式</strong></p>
+<pre><code>H_c=\sum_&#123;l_1+\dots +l_p&#125;\prod^p_&#123;i=1&#125; \binom&#123;n_i&#125;&#123;l_i&#125;
+</code></pre>
+<p>$$<br>H_c&#x3D;\sum_{l_1+\dots +l_p}\prod^p_{i&#x3D;1} \binom{n_i}{l_i}<br>$$</p>
+<p><strong>批梯度下降公式</strong></p>
+<pre><code>\frac&#123;\partial J(\theta)&#125;&#123;\partial\theta_j&#125; = -\frac1m\sum_&#123;i=0&#125;^m(y^i - 	h_\theta(x^i))x^i_j \tag&#123;4&#125; \\
+</code></pre>
+<p>$$<br>\frac{\partial J(\theta)}{\partial\theta_j} &#x3D; -\frac1m\sum_{i&#x3D;0}^m(y^i - 	h_\theta(x^i))x^i_j \tag{4} \<br>$$</p>
+<p><strong>等号对其</strong> </p>
+<pre><code>\begin&#123;aligned&#125;
+ a + b + c &amp;= d \\
+ e + f &amp;= g  
+\end&#123;aligned&#125;
+</code></pre>
+<p>$$<br>\begin{aligned}<br> a + b + c &amp;&#x3D; d \<br> e + f &amp;&#x3D; g<br>\end{aligned}<br>$$</p>
+<h2 id="2-6-特殊字符"><a href="#2-6-特殊字符" class="headerlink" title="2.6 特殊字符"></a>2.6 特殊字符</h2><p><strong>箭头</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">$\leftarrow$</th>
+<th align="center">\leftarrow</th>
+<th align="center">$\longleftarrow$</th>
+<th align="center">\longleftarrow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$\rightarrow$</td>
+<td align="center">\rightarrow</td>
+<td align="center">$\longrightarrow$</td>
+<td align="center">\longrightarrow</td>
+</tr>
+<tr>
+<td align="center">$\leftrightarrow$</td>
+<td align="center">\leftrightarrow</td>
+<td align="center">$\longleftrightarrow$</td>
+<td align="center">\longleftrightarrow</td>
+</tr>
+<tr>
+<td align="center">$\Leftarrow$</td>
+<td align="center">\Leftarrow</td>
+<td align="center">$\Longleftarrow$</td>
+<td align="center">\Longleftarrow</td>
+</tr>
+<tr>
+<td align="center">$\Rightarrow$</td>
+<td align="center">\Rightarrow</td>
+<td align="center">$\Longrightarrow$</td>
+<td align="center">\Longrightarrow</td>
+</tr>
+<tr>
+<td align="center">$\Leftrightarrow$</td>
+<td align="center">\Leftrightarrow</td>
+<td align="center">$\Longleftrightarrow$</td>
+<td align="center">\Longleftrightarrow</td>
+</tr>
+<tr>
+<td align="center">$\uparrow$</td>
+<td align="center">\uparrow</td>
+<td align="center">$\Uparrow$</td>
+<td align="center">\Uparrow</td>
+</tr>
+<tr>
+<td align="center">$\downarrow$</td>
+<td align="center">\downarrow</td>
+<td align="center">$\Downarrow$</td>
+<td align="center">\Downarrow</td>
+</tr>
+<tr>
+<td align="center">$\overrightarrow {max}$</td>
+<td align="center">\overrightarrow</td>
+<td align="center">$\overleftarrow {min}$</td>
+<td align="center">\overleftarrow</td>
+</tr>
+</tbody></table>
+<p><strong>符号</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">markdown</th>
+<th align="center">markdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">黑桃</td>
+<td align="center">$\spades$</td>
+<td align="center">\spades</td>
+</tr>
+<tr>
+<td align="center">红桃</td>
+<td align="center">$\hearts$</td>
+<td align="center">\hearts</td>
+</tr>
+<tr>
+<td align="center">梅花</td>
+<td align="center">$\clubs$</td>
+<td align="center">\clubs</td>
+</tr>
+<tr>
+<td align="center">方片</td>
+<td align="center">$\diamonds$</td>
+<td align="center">\diamonds</td>
+</tr>
+</tbody></table>
+<h2 id="2-7-上下标"><a href="#2-7-上下标" class="headerlink" title="2.7 上下标"></a>2.7 上下标</h2><pre><code>\Large &#123;\mathop&#123;min&#125;\limits_G&#125;
+</code></pre>
+<p>$$<br>\Large {\mathop{min}\limits_G}<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/15/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Josh Lee</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
