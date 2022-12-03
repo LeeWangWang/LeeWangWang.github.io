@@ -385,14 +385,14 @@
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/tags/IntelliJ-IDEA/</loc>
+    <loc>https://leewangwang.github.io/tags/Java/</loc>
     <lastmod>2022-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/tags/Java/</loc>
+    <loc>https://leewangwang.github.io/tags/IntelliJ-IDEA/</loc>
     <lastmod>2022-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -469,20 +469,6 @@
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/tags/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2022-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://leewangwang.github.io/tags/GAN/</loc>
-    <lastmod>2022-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://leewangwang.github.io/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2022-12-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -490,7 +476,21 @@
   </url>
   
   <url>
+    <loc>https://leewangwang.github.io/tags/%E9%9A%8F%E8%AE%B0/</loc>
+    <lastmod>2022-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://leewangwang.github.io/tags/GPU/</loc>
+    <lastmod>2022-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://leewangwang.github.io/tags/GAN/</loc>
     <lastmod>2022-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -548,20 +548,6 @@
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/categories/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2022-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://leewangwang.github.io/categories/%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/</loc>
-    <lastmod>2022-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://leewangwang.github.io/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2022-12-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -569,7 +555,21 @@
   </url>
   
   <url>
+    <loc>https://leewangwang.github.io/categories/%E9%9A%8F%E8%AE%B0/</loc>
+    <lastmod>2022-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://leewangwang.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2022-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://leewangwang.github.io/categories/%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/</loc>
     <lastmod>2022-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
