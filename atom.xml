@@ -6,7 +6,7 @@
   <link href="https://leewangwang.github.io/atom.xml" rel="self"/>
   
   <link href="https://leewangwang.github.io/"/>
-  <updated>2022-12-01T07:27:54.215Z</updated>
+  <updated>2023-03-22T01:04:22.023Z</updated>
   <id>https://leewangwang.github.io/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mac mysql8.0登陆报错</title>
+    <link href="https://leewangwang.github.io/2023/03/22/Mac%20mysql8.0%E7%99%BB%E9%99%86%E6%8A%A5%E9%94%99/"/>
+    <id>https://leewangwang.github.io/2023/03/22/Mac%20mysql8.0%E7%99%BB%E9%99%86%E6%8A%A5%E9%94%99/</id>
+    <published>2023-03-22T01:02:43.000Z</published>
+    <updated>2023-03-22T01:04:22.023Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-登陆mysql报错"><a href="#1-登陆mysql报错" class="headerlink" title="1. 登陆mysql报错"></a>1. 登陆mysql报错</h1><p>启动mysql</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">sudo <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span><span class="hljs-keyword">local</span><span class="hljs-operator">/</span>mysql<span class="hljs-operator">/</span>support<span class="hljs-operator">-</span>files<span class="hljs-operator">/</span>mysql.server <span class="hljs-keyword">start</span><br></code></pre></td></tr></table></figure><p>终端登陆mysql</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br></code></pre></td></tr></table></figure><p>发现输入密码后报错了，输了几个密码后还是这样</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">%</span> Enter password: <span class="hljs-number">123456</span><br><span class="hljs-operator">%</span> ERROR <span class="hljs-number">1045</span> (<span class="hljs-number">28000</span>): Access denied <span class="hljs-keyword">for</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> (<span class="hljs-keyword">using</span> password: YES)<br></code></pre></td></tr></table></figure><h1 id="2-停止mysql"><a href="#2-停止mysql" class="headerlink" title="2. 停止mysql"></a>2. 停止mysql</h1><p>终端执行</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">sudo /usr/local/mysql/support-files/mysql.server stop<br></code></pre></td></tr></table></figure><h1 id="3-启动MySql的安全模式"><a href="#3-启动MySql的安全模式" class="headerlink" title="3.启动MySql的安全模式"></a>3.启动MySql的安全模式</h1><p>1 终端跳转到bin目录下</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">cd /usr/local/mysql/bin<br></code></pre></td></tr></table></figure><p>2 执行命令，获取权限</p><figure class="highlight powershell"><table><tr><td class="code"><pre><code class="hljs powershell">sudo su<br></code></pre></td></tr></table></figure><p>3 输入你电脑的密码</p><figure class="highlight powershell"><table><tr><td class="code"><pre><code class="hljs powershell">Password:<span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure><p>4 密码输完后会有一个 sh-3.2#</p><p>在sh-3.2# 下输入：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">./mysqld_safe --skip-grant-tables &amp;<br></code></pre></td></tr></table></figure><p>5 禁止mysql验证，原来停掉的mysql会重新启动</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">[<span class="hljs-number">1</span>] <span class="hljs-number">2514</span><br>sh<span class="hljs-number">-3.2</span># <span class="hljs-number">2023</span><span class="hljs-number">-03</span><span class="hljs-number">-11</span>T12:<span class="hljs-number">34</span>:<span class="hljs-number">01.6</span>NZ mysqld_safe Logging <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;/usr/local/mysql-8.0.32-macos13-x86_64/data/wangwangdeMacBook-Pro.local.err&#x27;</span>.<br><span class="hljs-number">2023</span><span class="hljs-number">-03</span><span class="hljs-number">-11</span>T12:<span class="hljs-number">34</span>:<span class="hljs-number">01.6</span>NZ mysqld_safe Starting mysqld daemon <span class="hljs-keyword">with</span> databases <span class="hljs-keyword">from</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span><span class="hljs-keyword">local</span><span class="hljs-operator">/</span>mysql<span class="hljs-number">-8.0</span><span class="hljs-number">.32</span><span class="hljs-operator">-</span>macos13<span class="hljs-operator">-</span>x86_64<span class="hljs-operator">/</span>data<br></code></pre></td></tr></table></figure><h1 id="4-开始重置密码"><a href="#4-开始重置密码" class="headerlink" title="4.开始重置密码"></a>4.开始重置密码</h1><p>1 原来的终端不动，重新打开一个新的终端，<br>执行命令跳过验证进入：</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u <span class="hljs-operator">-</span>root<br></code></pre></td></tr></table></figure><p>2 切换到mysql</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">use mysql;<br></code></pre></td></tr></table></figure><p>3 把root的密码改为空</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">set</span> authentication_string<span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;<br></code></pre></td></tr></table></figure><p>4 刷新权限</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">flush privileges;<br></code></pre></td></tr></table></figure><p>5 执行命令</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">WITH</span> mysql_native_password <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;123456&#x27;</span>;&quot; <br></code></pre></td></tr></table></figure><p>6 退出登录</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">exit<br></code></pre></td></tr></table></figure><p>7 重启mysql后，再重新登陆一下mysql</p><p>5.重置完成</p><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;1-登陆mysql报错&quot;&gt;&lt;a href=&quot;#1-登陆mysql报错&quot; class=&quot;headerlink&quot; title=&quot;1. 登陆mysql报错&quot;&gt;&lt;/a&gt;1. 登陆mysql报错&lt;/h1&gt;&lt;p&gt;启动mysql&lt;/p&gt;
+&lt;figure class=&quot;highl</summary>
+      
+    
+    
+    
+    <category term="报错解决" scheme="https://leewangwang.github.io/categories/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/"/>
+    
+    
+    <category term="MySql" scheme="https://leewangwang.github.io/tags/MySql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面经记录</title>
+    <link href="https://leewangwang.github.io/2023/03/21/%E9%9D%A2%E7%BB%8F%E8%AE%B0%E5%BD%95/"/>
+    <id>https://leewangwang.github.io/2023/03/21/%E9%9D%A2%E7%BB%8F%E8%AE%B0%E5%BD%95/</id>
+    <published>2023-03-21T13:36:22.000Z</published>
+    <updated>2023-03-21T13:46:49.893Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="为什么B-树要叫B-树，B-树的概念是什么？"><a href="#为什么B-树要叫B-树，B-树的概念是什么？" class="headerlink" title="为什么B+树要叫B+树，B+树的概念是什么？"></a>为什么B+树要叫B+树，B+树的概念是什么？</h3><p>B+树是一种多路平衡查找树，常用于数据库和文件系统中的索引结构。B+树的名称中的B代表“Balanced”（平衡），而“+”代表B+树的一个特点，即在内部节点上只存储键值信息，而不存储数据记录的指针。因此，B+树比B树更适合磁盘存储，因为可以将更多的关键字放入内存中。</p><p>B+树的概念是将数据分成多个节点进行存储，每个节点中包含多个关键字和指向其他节点的指针。B+树的节点包含两种类型：内部节点和叶节点。内部节点存储关键字和指向子节点的指针，而叶节点存储关键字和指向数据记录的指针。B+树的所有叶节点按顺序链接在一起，形成一个链表，可以快速地遍历所有的数据记录。</p><p>B+树的搜索操作从根节点开始，递归地向下查找，直到找到包含所需关键字的叶节点。B+树支持插入、删除和更新操作，这些操作都需要保持B+树的平衡性和排序性质。B+树的平衡性保证了查询、插入、删除等操作的时间复杂度为O(log n)，其中n是B+树中存储的数据记录数。</p><p>根据网络搜索结果，B+树是B-树的变体，也是一种多路搜索树<a href="https://cloud.tencent.com/developer/article/1691641">1</a>。B+树的特点是：</p><ul><li><a href="https://cloud.tencent.com/developer/article/1691641">所有的数据都存储在叶子节点，非叶子节点只存储索引</a><a href="https://cloud.tencent.com/developer/article/1691641">1</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li><a href="https://cloud.tencent.com/developer/article/1691641">叶子节点之间用指针相连，形成一个有序链表</a><a href="https://cloud.tencent.com/developer/article/1691641">1</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li>每个节点的关键字数量和孩子数量相等<a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li></ul><p>B+树的名字可能是因为它比B-树有更多的优点，比如：</p><ul><li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">B+树的查询效率更稳定，因为所有数据都在叶子节点，所以每次查找的路径长度相同</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">B+树更适合范围查询，因为叶子节点形成了一个有序链表，可以方便地遍历指定范围内的数据</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">B+树更节省空间，因为非叶子节点不存储数据，所以每个节点可以存储更多的关键字和指针</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li></ul><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
+    
+    
+    <summary type="html">总结面试题不会的题目</summary>
+    
+    
+    
+    <category term="面经" scheme="https://leewangwang.github.io/categories/%E9%9D%A2%E7%BB%8F/"/>
+    
+    
+    <category term="Java" scheme="https://leewangwang.github.io/tags/Java/"/>
+    
+    <category term="八股文" scheme="https://leewangwang.github.io/tags/%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    
+    <category term="面经" scheme="https://leewangwang.github.io/tags/%E9%9D%A2%E7%BB%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>世界杯语录</title>
@@ -436,61 +486,6 @@
     <category term="C语言" scheme="https://leewangwang.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
     
     <category term="嵌入式" scheme="https://leewangwang.github.io/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>K60学习笔记（1）——启动文件分析</title>
-    <link href="https://leewangwang.github.io/2019/03/03/K60%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/"/>
-    <id>https://leewangwang.github.io/2019/03/03/K60%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/</id>
-    <published>2019-03-03T07:32:46.000Z</published>
-    <updated>2022-11-24T06:37:44.219Z</updated>
-    
-    <content type="html"><![CDATA[<p>初始化函数</p><p>上电复位</p><p>中断向量表：在<code>vectors.c</code>里面定义，在<code>vectors.h</code>文件里。    </p><p>在vectors.h里面两行:</p><figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> VECTOR_000 (vector_entry)__BOOT_STACK_ADDRESS <span class="hljs-comment">// ARM core Initial Supervisor SP</span></span><br></code></pre></td></tr></table></figure><figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> VECTOR_001 Reset_Handler <span class="hljs-comment">// 0x0000_0004 1 - ARM core Initial Program Counter</span></span><br></code></pre></td></tr></table></figure><p>分别定义了<code>sp</code>栈指针，和复位中断（根据字义便知道意思）</p><ul><li>Reset_Handler：在<code>vectors.h</code>里面有这个函数：extern void Reset_Handler (void);               <ul><li>声明复位函数，这是上电后运行的第一个函数，用汇编语言写的。</li></ul></li><li>start：在<code>start.c</code>里面定义。就是初始化系统，关闭看门狗，复制数据到内存，配置时钟，然后就进入了main函数</li><li>common_startup:复制中断向量表，初始化数据段等</li><li>sysinit：初始化时钟和串口</li><li>main.c：执行的函数，我们要写的文件</li></ul><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;初始化函数&lt;/p&gt;
-&lt;p&gt;上电复位&lt;/p&gt;
-&lt;p&gt;中断向量表：在&lt;code&gt;vectors.c&lt;/code&gt;里面定义，在&lt;code&gt;vectors.h&lt;/code&gt;文件里。    &lt;/p&gt;
-&lt;p&gt;在vectors.h里面两行:&lt;/p&gt;
-&lt;figure class=&quot;high</summary>
-      
-    
-    
-    
-    <category term="嵌入式" scheme="https://leewangwang.github.io/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
-    
-    
-    <category term="K60" scheme="https://leewangwang.github.io/tags/K60/"/>
-    
-    <category term="C语言" scheme="https://leewangwang.github.io/tags/C%E8%AF%AD%E8%A8%80/"/>
-    
-    <category term="嵌入式" scheme="https://leewangwang.github.io/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IntelliJ IDEA下载安装教程</title>
-    <link href="https://leewangwang.github.io/2019/02/24/IntelliJ%20IDEA%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
-    <id>https://leewangwang.github.io/2019/02/24/IntelliJ%20IDEA%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</id>
-    <published>2019-02-24T06:31:39.000Z</published>
-    <updated>2022-11-24T06:35:26.065Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-官网下载"><a href="#1-官网下载" class="headerlink" title="1 官网下载"></a>1 官网下载</h2><p>网址：<a href="https://www.jetbrains.com/idea/">https://www.jetbrains.com/idea/</a></p><p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202211211039480.png" alt="image-20221121103934371"></p><p>选择<code>Download</code>，Mac和Windows按照自己的需求选择，一般使用社区免费版即可</p><p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202211211040406.png" alt="image-20221121104043904"></p><p>下载可能需要注册，不需要理会，等待下载界面出来就行了</p><h2 id="2-安装IDEA"><a href="#2-安装IDEA" class="headerlink" title="2 安装IDEA"></a>2 安装IDEA</h2><p>双击下载好的ideaIU-2018.3.4.exe文件（ideaIU-2022.2.3.dmg），选择next</p><p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202211211042146.png" alt="img"></p><p>Windows电脑需要自定义设置安装目录，Mac电脑的话无需设置目录，一直下一步即可</p><p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202211211043565.png" alt="img"></p><p>按照下面的勾选就行了</p><p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202211211043618.png" alt="img"></p><p>点击install，等待安装成功就行了</p><p><img src="https://my-typora-photos.oss-cn-beijing.aliyuncs.com/img/202211211043291.png" alt="img"></p><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
-    
-    
-    <summary type="html">IDEA的安装教程，自己曾经使用Windows安装了十几遍</summary>
-    
-    
-    
-    <category term="教程" scheme="https://leewangwang.github.io/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="IntelliJ IDEA" scheme="https://leewangwang.github.io/tags/IntelliJ-IDEA/"/>
-    
-    <category term="Java" scheme="https://leewangwang.github.io/tags/Java/"/>
     
   </entry>
   

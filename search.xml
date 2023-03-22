@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Mac mysql8.0登陆报错</title>
+      <link href="/2023/03/22/Mac%20mysql8.0%E7%99%BB%E9%99%86%E6%8A%A5%E9%94%99/"/>
+      <url>/2023/03/22/Mac%20mysql8.0%E7%99%BB%E9%99%86%E6%8A%A5%E9%94%99/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-登陆mysql报错"><a href="#1-登陆mysql报错" class="headerlink" title="1. 登陆mysql报错"></a>1. 登陆mysql报错</h1><p>启动mysql</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">sudo <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span><span class="hljs-keyword">local</span><span class="hljs-operator">/</span>mysql<span class="hljs-operator">/</span>support<span class="hljs-operator">-</span>files<span class="hljs-operator">/</span>mysql.server <span class="hljs-keyword">start</span><br></code></pre></td></tr></table></figure><p>终端登陆mysql</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br></code></pre></td></tr></table></figure><p>发现输入密码后报错了，输了几个密码后还是这样</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">%</span> Enter password: <span class="hljs-number">123456</span><br><span class="hljs-operator">%</span> ERROR <span class="hljs-number">1045</span> (<span class="hljs-number">28000</span>): Access denied <span class="hljs-keyword">for</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> (<span class="hljs-keyword">using</span> password: YES)<br></code></pre></td></tr></table></figure><h1 id="2-停止mysql"><a href="#2-停止mysql" class="headerlink" title="2. 停止mysql"></a>2. 停止mysql</h1><p>终端执行</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">sudo /usr/local/mysql/support-files/mysql.server stop<br></code></pre></td></tr></table></figure><h1 id="3-启动MySql的安全模式"><a href="#3-启动MySql的安全模式" class="headerlink" title="3.启动MySql的安全模式"></a>3.启动MySql的安全模式</h1><p>1 终端跳转到bin目录下</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">cd /usr/local/mysql/bin<br></code></pre></td></tr></table></figure><p>2 执行命令，获取权限</p><figure class="highlight powershell"><table><tr><td class="code"><pre><code class="hljs powershell">sudo su<br></code></pre></td></tr></table></figure><p>3 输入你电脑的密码</p><figure class="highlight powershell"><table><tr><td class="code"><pre><code class="hljs powershell">Password:<span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure><p>4 密码输完后会有一个 sh-3.2#</p><p>在sh-3.2# 下输入：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">./mysqld_safe --skip-grant-tables &amp;<br></code></pre></td></tr></table></figure><p>5 禁止mysql验证，原来停掉的mysql会重新启动</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">[<span class="hljs-number">1</span>] <span class="hljs-number">2514</span><br>sh<span class="hljs-number">-3.2</span># <span class="hljs-number">2023</span><span class="hljs-number">-03</span><span class="hljs-number">-11</span>T12:<span class="hljs-number">34</span>:<span class="hljs-number">01.6</span>NZ mysqld_safe Logging <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;/usr/local/mysql-8.0.32-macos13-x86_64/data/wangwangdeMacBook-Pro.local.err&#x27;</span>.<br><span class="hljs-number">2023</span><span class="hljs-number">-03</span><span class="hljs-number">-11</span>T12:<span class="hljs-number">34</span>:<span class="hljs-number">01.6</span>NZ mysqld_safe Starting mysqld daemon <span class="hljs-keyword">with</span> databases <span class="hljs-keyword">from</span> <span class="hljs-operator">/</span>usr<span class="hljs-operator">/</span><span class="hljs-keyword">local</span><span class="hljs-operator">/</span>mysql<span class="hljs-number">-8.0</span><span class="hljs-number">.32</span><span class="hljs-operator">-</span>macos13<span class="hljs-operator">-</span>x86_64<span class="hljs-operator">/</span>data<br></code></pre></td></tr></table></figure><h1 id="4-开始重置密码"><a href="#4-开始重置密码" class="headerlink" title="4.开始重置密码"></a>4.开始重置密码</h1><p>1 原来的终端不动，重新打开一个新的终端，<br>执行命令跳过验证进入：</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u <span class="hljs-operator">-</span>root<br></code></pre></td></tr></table></figure><p>2 切换到mysql</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">use mysql;<br></code></pre></td></tr></table></figure><p>3 把root的密码改为空</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">set</span> authentication_string<span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;<br></code></pre></td></tr></table></figure><p>4 刷新权限</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">flush privileges;<br></code></pre></td></tr></table></figure><p>5 执行命令</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">WITH</span> mysql_native_password <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;123456&#x27;</span>;&quot; <br></code></pre></td></tr></table></figure><p>6 退出登录</p><figure class="highlight sql"><table><tr><td class="code"><pre><code class="hljs sql">exit<br></code></pre></td></tr></table></figure><p>7 重启mysql后，再重新登陆一下mysql</p><p>5.重置完成</p><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 报错解决 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>面经记录</title>
+      <link href="/2023/03/21/%E9%9D%A2%E7%BB%8F%E8%AE%B0%E5%BD%95/"/>
+      <url>/2023/03/21/%E9%9D%A2%E7%BB%8F%E8%AE%B0%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h3 id="为什么B-树要叫B-树，B-树的概念是什么？"><a href="#为什么B-树要叫B-树，B-树的概念是什么？" class="headerlink" title="为什么B+树要叫B+树，B+树的概念是什么？"></a>为什么B+树要叫B+树，B+树的概念是什么？</h3><p>B+树是一种多路平衡查找树，常用于数据库和文件系统中的索引结构。B+树的名称中的B代表“Balanced”（平衡），而“+”代表B+树的一个特点，即在内部节点上只存储键值信息，而不存储数据记录的指针。因此，B+树比B树更适合磁盘存储，因为可以将更多的关键字放入内存中。</p><p>B+树的概念是将数据分成多个节点进行存储，每个节点中包含多个关键字和指向其他节点的指针。B+树的节点包含两种类型：内部节点和叶节点。内部节点存储关键字和指向子节点的指针，而叶节点存储关键字和指向数据记录的指针。B+树的所有叶节点按顺序链接在一起，形成一个链表，可以快速地遍历所有的数据记录。</p><p>B+树的搜索操作从根节点开始，递归地向下查找，直到找到包含所需关键字的叶节点。B+树支持插入、删除和更新操作，这些操作都需要保持B+树的平衡性和排序性质。B+树的平衡性保证了查询、插入、删除等操作的时间复杂度为O(log n)，其中n是B+树中存储的数据记录数。</p><p>根据网络搜索结果，B+树是B-树的变体，也是一种多路搜索树<a href="https://cloud.tencent.com/developer/article/1691641">1</a>。B+树的特点是：</p><ul><li><a href="https://cloud.tencent.com/developer/article/1691641">所有的数据都存储在叶子节点，非叶子节点只存储索引</a><a href="https://cloud.tencent.com/developer/article/1691641">1</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li><a href="https://cloud.tencent.com/developer/article/1691641">叶子节点之间用指针相连，形成一个有序链表</a><a href="https://cloud.tencent.com/developer/article/1691641">1</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li>每个节点的关键字数量和孩子数量相等<a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li></ul><p>B+树的名字可能是因为它比B-树有更多的优点，比如：</p><ul><li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">B+树的查询效率更稳定，因为所有数据都在叶子节点，所以每次查找的路径长度相同</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">B+树更适合范围查询，因为叶子节点形成了一个有序链表，可以方便地遍历指定范围内的数据</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li><li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">B+树更节省空间，因为非叶子节点不存储数据，所以每个节点可以存储更多的关键字和指针</a><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html">2</a>。</li></ul><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面经 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 八股文 </tag>
+            
+            <tag> 面经 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>世界杯语录</title>
       <link href="/2022/12/01/%E4%B8%96%E7%95%8C%E6%9D%AF%E8%AF%AD%E5%BD%95/"/>
       <url>/2022/12/01/%E4%B8%96%E7%95%8C%E6%9D%AF%E8%AF%AD%E5%BD%95/</url>
