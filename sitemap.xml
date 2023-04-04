@@ -380,20 +380,6 @@
 
   
   <url>
-    <loc>https://leewangwang.github.io/tags/Anaconda/</loc>
-    <lastmod>2023-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://leewangwang.github.io/tags/python/</loc>
-    <lastmod>2023-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://leewangwang.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -422,6 +408,27 @@
   </url>
   
   <url>
+    <loc>https://leewangwang.github.io/tags/Hexo/</loc>
+    <lastmod>2023-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://leewangwang.github.io/tags/Anaconda/</loc>
+    <lastmod>2023-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://leewangwang.github.io/tags/python/</loc>
+    <lastmod>2023-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://leewangwang.github.io/tags/GitHub/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -430,13 +437,6 @@
   
   <url>
     <loc>https://leewangwang.github.io/tags/git/</loc>
-    <lastmod>2023-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://leewangwang.github.io/tags/Hexo/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -576,14 +576,14 @@
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</loc>
+    <loc>https://leewangwang.github.io/tags/GPU/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/tags/GPU/</loc>
+    <loc>https://leewangwang.github.io/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -613,13 +613,6 @@
 
   
   <url>
-    <loc>https://leewangwang.github.io/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/</loc>
-    <lastmod>2023-04-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://leewangwang.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -628,6 +621,13 @@
   
   <url>
     <loc>https://leewangwang.github.io/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2023-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://leewangwang.github.io/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -690,14 +690,14 @@
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</loc>
+    <loc>https://leewangwang.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://leewangwang.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://leewangwang.github.io/categories/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2023-04-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
