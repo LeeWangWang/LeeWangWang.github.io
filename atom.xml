@@ -6,7 +6,7 @@
   <link href="https://leewangwang.github.io/atom.xml" rel="self"/>
   
   <link href="https://leewangwang.github.io/"/>
-  <updated>2023-04-04T12:58:52.348Z</updated>
+  <updated>2023-04-04T13:00:46.437Z</updated>
   <id>https://leewangwang.github.io/</id>
   
   <author>
@@ -21,18 +21,12 @@
     <link href="https://leewangwang.github.io/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/"/>
     <id>https://leewangwang.github.io/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</id>
     <published>2023-04-03T01:59:41.000Z</published>
-    <updated>2023-04-04T12:58:52.348Z</updated>
+    <updated>2023-04-04T13:00:46.437Z</updated>
     
     <content type="html"><![CDATA[<h1 id="腾讯测开一面（王）"><a href="#腾讯测开一面（王）" class="headerlink" title="腾讯测开一面（王）"></a>腾讯测开一面（王）</h1><ol><li>算法题：有效括号 很容易</li><li>多线程创建方法</li><li>线程锁的实现</li><li>synchronized用法</li><li>为什么用激活函数</li><li>dataframe遍历</li><li>batchsize设大设小的区别</li><li>实际中如何调参batchsize</li><li>batchsize过小的危害</li><li>解释一下归一化</li><li>用过哪些网络模型</li><li>介绍Transformer</li><li>项目中怎么使用JMeter测试登录接口</li><li>请求头header包括什么</li><li>游戏云顶之弈可能出现哪些bug，可能是什么原因造成的</li></ol><h1 id="美团测开一面（张）"><a href="#美团测开一面（张）" class="headerlink" title="美团测开一面（张）"></a>美团测开一面（张）</h1><ol><li>自我介绍</li><li>从哪学的知识？</li><li><code>==</code>和<code>equals</code>的区别</li><li>Java反射</li><li>Java应用和小程序的区别</li><li>Exception和Error的区别</li><li>Java异常的处理方法</li><li>自定义异常</li><li>Spring Boot 的区别以及优点</li><li>介绍一下缓存</li><li>Redis三种策略</li><li>缓存穿透、击穿</li><li>Linux命令</li><li>项目遇到的问题</li></ol><h1 id="美团测开一面（柳）"><a href="#美团测开一面（柳）" class="headerlink" title="美团测开一面（柳）"></a>美团测开一面（柳）</h1><ol><li>项目最大的困难</li><li>自测发现了多少bug</li><li>如何保证测试全面性</li><li>软件测试模型 v模型</li><li>算法遇到的困难</li><li>分工是什么</li><li>网络协议 </li><li>tcp udp区别 适用场景</li><li>常用shell命令</li><li>查日志命令</li><li>数据库类型</li><li>大数据生态</li><li>分布式文件数据库</li><li>数据库索引</li><li>四大特性</li><li>MySQL函数</li><li>jdk和jre</li><li>数组和链表区别</li><li>spring配置文件</li><li>maven pom文件</li><li>gc什么时候垃圾回收失败</li><li>为什么想做测开</li><li>测开工作内容</li><li>实习规划</li></ol><h1 id="美团测开二面（柳）"><a href="#美团测开二面（柳）" class="headerlink" title="美团测开二面（柳）"></a>美团测开二面（柳）</h1><ol><li>对面试岗位的了解</li><li>你的优势，为什么选择这个岗位</li><li>测试开发的职责</li><li>测试的题目（银行App）</li><li>描述一下测试用例（安全性）（性能）（兼容性）</li><li>苹果不同系列手机都要测试吗？</li><li>你觉得测开要学习哪些内容？</li><li>你学习了哪些测试的基础知识</li><li>“信仰不息”里面有哪些测试？</li><li>如何学习的测试开发？</li><li>你觉得哪一些知识学习比较难</li><li>最近学习的知识（印象最深刻的）</li><li>自动化测试实现的原理</li><li>路径规划项目（怎么判断规划路径是最好的）</li><li>你对自己的现状满足吗？</li><li>为什么选择美团？</li><li>你比较看重什么？</li><li>有其他的HC吗？</li><li>能实习多久？</li></ol><h1 id="美团开发一面（徐）"><a href="#美团开发一面（徐）" class="headerlink" title="美团开发一面（徐）"></a>美团开发一面（徐）</h1><ol><li>日志异常检测怎么做？</li><li>通过日志就能检测到异常？</li><li>整个日志的所有情况都能实现？</li><li>秒杀系统</li><li>本地缓存解决问题？</li><li>Redis怎么保证缓存增减是正确的？</li><li>秒杀库存增减失败</li><li>Redis/Mysql数据怎么保证是对的？</li><li>Redis删除库存指令</li><li>Spring/Spring Boot优势</li><li>Spring AOP再项目中有用到吗？</li><li>项目中如何限流</li><li>限流底层原理</li><li>线程池参数</li><li>核心线程数设多大？</li><li>同步锁/可重复锁</li><li>类加载的底层原理</li><li>Mysql脏读</li><li>MVCC解决什么问题？</li><li>Redis击穿</li><li>Java堆栈信息怎么查看</li><li>创建对象有哪些方式？</li></ol><h1 id="美团开发一面（徐）-1"><a href="#美团开发一面（徐）-1" class="headerlink" title="美团开发一面（徐）"></a>美团开发一面（徐）</h1><ol><li>项目中数据库是如何设计的？</li><li>为什么要有一个秒杀单独商品表</li><li>网页访问流程</li><li>服务端响应流程</li><li>Linux执行ls命令的实现原理</li><li>算法题：倒水桶</li></ol><h1 id="字节开发一面（徐）"><a href="#字节开发一面（徐）" class="headerlink" title="字节开发一面（徐）"></a>字节开发一面（徐）</h1><ol><li>优先队列</li><li>堆的底层数据结构</li><li>操作系统底层使用哪些数据结构</li><li>集合数据结构</li><li>线程安全</li><li>自旋锁</li><li>垃圾回收机制</li><li>当程序出现gc，正常的程序是否能被执行</li><li>http协议有哪些常见的状态码</li><li>400引起的原因</li><li>500如何排查</li><li>mySQL了解哪些，事务、索引（展开说说）</li><li>聚簇索引和非聚簇索引的区别</li><li>什么是回表查询</li><li>Redis的数据结构和方法</li><li>你都用过什么数据结构</li><li>Redis之key和value可以存储的最大值</li><li>算法题</li></ol><script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h1 id=&quot;腾讯测开一面（王）&quot;&gt;&lt;a href=&quot;#腾讯测开一面（王）&quot; class=&quot;headerlink&quot; title=&quot;腾讯测开一面（王）&quot;&gt;&lt;/a&gt;腾讯测开一面（王）&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;算法题：有效括号 很容易&lt;/li&gt;
-&lt;li&gt;多线程创建方法&lt;/li&gt;
-&lt;</summary>
-      
+    <summary type="html">记录下各位的面试经过</summary>
     
     
     
