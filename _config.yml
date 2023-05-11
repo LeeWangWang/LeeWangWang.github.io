@@ -1,0 +1,114 @@
+# Hexo配置
+## 文档: https://hexo.io/docs/configuration.html
+## 资源: https://github.com/hexojs/hexo/
+
+# 网站
+title: The path of Learning
+subtitle: ''
+description:    ''
+keywords:
+author: Josh Lee
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+## 在这里设置您的网站url。例如，如果你使用GitHub页面，设置url为'https://username.github.io/project'
+url: https://leewangwang.github.io/
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # 设置为false将从永久链接中删除尾随的'index.html'
+  trailing_html: true # 设置为false将从永久链接中删除尾随的'.html'
+
+# 目录
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# 写作
+new_post_name: :title.md # 新博客的文件名
+default_layout: post
+titlecase: false # 将标题转换为标题case
+external_link:
+  enable: true # 在新选项卡中打开外部链接
+  field: site # 适用于整个网站
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: false
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: true
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# 首页设置
+# path:你的博客索引页的根路径。(default = ")
+# per_page:每页显示的帖子。(0 =禁用分页)
+# order_by:发布顺序。(默认按日期降序排序)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# 类别与标签
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# 日期/时间格式
+# Hexo使用Moment.js来解析和显示日期
+# 您可以自定义日期格式定义在
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
+
+# 分页
+## 将per_page设置为0以禁用分页
+per_page: 10
+pagination_dir: page
+
+# Include / Exclude file(s)
+## Include:/exclude:选项只应用于'source/'文件夹
+include:
+exclude:
+ignore:
+
+# 扩展
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: butterfly
+
+# 部署
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repo: git@github.com:LeeWangWang/LeeWangWang.github.io.git
+  branch: main
+  
+  # 文章加密
+encrypt:
+  enable: true
+  abstract: 这是一篇加密文章，内容可能是个人情感宣泄或者收费技术。如果你非常好奇，请与我联系。
+  message: 输入密码，查看文章。
+  
