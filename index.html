@@ -1,5 +1,216 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>The path of Learning</title><meta name="author" content="Josh Lee"><meta name="copyright" content="Josh Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="The path of Learning">
+<meta property="og:url" content="https://leewangwang.github.io/index.html">
+<meta property="og:site_name" content="The path of Learning">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leewangwang.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="Josh Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leewangwang.github.io/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leewangwang.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-block content
-  include ./includes/mixins/indexPostUI.pug
-  +indexPostUI
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'The path of Learning',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="The path of Learning" type="application/atom+xml">
+</head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">The path of Learning</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">The path of Learning</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/12/22/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-22T12:48:53.810Z" title="发表于 2024-12-22 20:48:53">2024-12-22</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post$ hexo new &quot;My New Post&quot;  More info: Writing Run server$ hexo server  More info: Server Generate static files$ hexo generate  More info: Generating Deploy to remote sites$ hexo deploy  More info: Deployment </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/12/22/%E5%85%A5%E8%81%8C%E6%97%A5%E8%AE%B0/" title="入职日记">入职日记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-22T10:19:42.000Z" title="发表于 2024-12-22 18:19:42">2024-12-22</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E8%AE%B0/">随记</a></span></div><div class="content">day1 入职之日         </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2024/12/22/README/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-22T09:39:39.322Z" title="发表于 2024-12-22 17:39:39">2024-12-22</time></span></div><div class="content">MyBlogSource用来存储&amp;更新我的博客源文件 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" title="面试记录——面试问题">面试记录——面试问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-03T01:59:41.000Z" title="发表于 2023-04-03 09:59:41">2023-04-03</time></span></div><div class="content">百度一面测开（王） 研究背景 技术方向 担任角色 KPI数据如何处理？ 创新点在哪？ 项目背景和技术方案 Mysql数据库设计考虑哪些问题？ 主键、外键、表、建立索引 数据库三范式要求 商品ID唯一主键 高并发处理 计算机网络五层模型 HTTP协议在哪一层？ Http和Https的区别 HTTP状态码 输入www.baidu.com的流程 什么是事务？事务的特性 主键与外键的区别 Mysql索引优缺点 进程、线程、协程 线程安全 黑盒、白盒（场景题测试—电梯） Jmeter压测的目的和流程 代码：两数之和  反问  部门技术栈  腾讯测开一面（王） 算法题：有效括号...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/03/%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%A5%E5%BF%97%E5%BA%8F%E5%88%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" title="基于深度学习的日志序列异常检测">基于深度学习的日志序列异常检测</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-03T01:27:24.000Z" title="发表于 2023-04-03 09:27:24">2023-04-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/04/03/%E9%9D%A2%E7%BB%8F%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E7%AE%97%E6%B3%95%E9%A2%98/" title="面经记录——算法题">面经记录——算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-03T01:27:24.000Z" title="发表于 2023-04-03 09:27:24">2023-04-03</time></span></div><div class="content">贪心算法分发饼干题目描述  有两个数组，一个代表小孩，一个代表饼干，第$i$个小孩的值是饥饿度，第$i$个饼干是饱和度，请问，饼干最多能让多少小孩吃饱。  解题思路  小饼干先喂饱小胃口。下面的代码中利用遍历cookie来遍历胃口数组，并没有再使用一个for循环，而是采用自加的方式，这也是常用的技巧。  public static int findContentChildren(int[]cookies, int[]children) &#123;        // 首先进行排序        Arrays.sort(cookies);        Arrays.sort(children);        int child = 0;        int cookie = 0;        // 从小到大进行遍历，最小大饼干分给最小的胃口        while (child &lt; children.length &amp;&amp; cookie &lt; cookies.length) &#123;            if...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/25/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E7%AC%94%E8%AF%95%E7%AE%97%E6%B3%95%E9%A2%98/" title="面试记录——笔试算法题">面试记录——笔试算法题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-25T02:43:45.000Z" title="发表于 2023-03-25 10:43:45">2023-03-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9D%A2%E7%BB%8F%E8%AE%B0%E5%BD%95/">面经记录</a></span></div><div class="content">2023.03.23—腾讯音乐笔试小红拿到了一个仅由大写字母和小写字母组成的字符串。她想知道，在不考虑大小写的情况下，有多少对相邻的字母相等？字符串长度不超过2x10^5。 示例输入  aABbbc  输出  3  public class Test &#123;    public static int test_1(String str) &#123;        int len = str.length();        int count = 0;        for (int i = 0; i &lt; len - 1; i++) &#123;            char char1 = Character.toLowerCase(str.charAt(i));            char char2 = Character.toLowerCase(str.charAt(i+1));            if (char1 == char2) &#123;                count += 1;            &#125;    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/23/Spring-Boot-Pay%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="Spring-Boot-Pay项目中遇到的问题">Spring-Boot-Pay项目中遇到的问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-23T01:49:09.000Z" title="发表于 2023-03-23 09:49:09">2023-03-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a></span></div><div class="content">1. Spring Boot问题  1.1 spring-boot-starter-thymeleaf:’ not foundSpring Boot版本3.0.7，Java17 问题定位：项目中的缓存问题。idea默认缓存maven本地库中的依赖库，在新建项目时会直接到缓存中寻找依赖库。如果相同库只是修改版本会导致IDEA无法从缓存中依赖到相应的库。 解决办法：IDEA设置里面的Invalidate Caches，之后右键pom.xml文件重新Reload Maven库。 1.2 Spring MVC – WebMvcConfigurerAdapter 已弃用public class SpringBootPayApplication implements WebMvcConfigurerAdapter  &#123;    private static final Logger logger = Logger.getLogger(SpringBootPayApplication.class);    public static void main(String[] args)...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/23/Redis%E5%85%A5%E9%97%A8/" title="Redis入门">Redis入门</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-23T01:49:09.000Z" title="发表于 2023-03-23 09:49:09">2023-03-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a></span></div><div class="content">Redis入门 Redis是一个基于内存的key-value结构数据库 性能极高 – 基于内存存储，读写性能高 原子 - Redis 的所有操作都是原子性的。 持久化 - Redis 支持数据的持久化。 备份 - Redis 支持数据的备份，即 master-slave 模式的数据备份。 适合存储热点数据（热点商品、咨询、新闻）   官网：https://redis.io/ Redis应用场景：缓存、消息队列、任务队列、分布式锁  Redis简介 Redis是用C语言开发的一个开源的、高性能的键值对(key-value)数据库，官方提供的数据是可以达到100000+的QPS（每秒内查询次数）。它存储的value类型比较丰富，也被称为结构化NoSql数据库 NoSql(Not Only Sql)，不仅仅是SQL，泛指非关系型数据库，NoSql数据库并不是要取代关系型数据库，而是关系型数据库的补充  下载与安装下载地址 Windows 版：https://github.com/microsoftarchive/redis/releases Linux...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/22/Linux%E6%93%8D%E4%BD%9CMysql/" title="Linux操作Mysql">Linux操作Mysql</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-22T10:29:43.000Z" title="发表于 2023-03-22 18:29:43">2023-03-22</time></span></div><div class="content">卸载Mysql1.快速删除 yum remove  mysql mysql-server mysql-libs mysql-server  2.查找残留程序 rpm -qa | grep mysqlrpm -qa | grep mariadb  3.删除残留程序 rpm -e --nodeps mariadb-libs-5.5.68-1.el7.x86_64  4.查找残留目录 whereis mysql  5.逐条删除目录 rm –rf /usr/local/mysql  安装Mysql1.先创建要解压到的目录 mkdir /usr/local/mysql  2.随后解压 tar -zxvf mysql-5.7.25-1.el7.x86_64.rpm-bundle.tar.gz -C /usr/local/mysql  3.按顺序安装rpm包 rpm -ivh mysql-community-common-5.7.25-1.el7.x86_64.rpmrpm -ivh mysql-community-libs-5.7.25-1.el7.x86_64.rpmrpm -ivh...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Josh Lee</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/hello-world/" title="Hello World">Hello World</a><time datetime="2024-12-22T12:48:53.810Z" title="发表于 2024-12-22 20:48:53">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/%E5%85%A5%E8%81%8C%E6%97%A5%E8%AE%B0/" title="入职日记">入职日记</a><time datetime="2024-12-22T10:19:42.000Z" title="发表于 2024-12-22 18:19:42">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/README/" title="无标题">无标题</a><time datetime="2024-12-22T09:39:39.322Z" title="发表于 2024-12-22 17:39:39">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" title="面试记录——面试问题">面试记录——面试问题</a><time datetime="2023-04-03T01:59:41.000Z" title="发表于 2023-04-03 09:59:41">2023-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%A5%E5%BF%97%E5%BA%8F%E5%88%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" title="基于深度学习的日志序列异常检测">基于深度学习的日志序列异常检测</a><time datetime="2023-04-03T01:27:24.000Z" title="发表于 2023-04-03 09:27:24">2023-04-03</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/MarkDown/"><span class="card-category-list-name">MarkDown</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/"><span class="card-category-list-name">嵌入式</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/"><span class="card-category-list-name">报错解决</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"><span class="card-category-list-name">日志异常检测</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">深度学习</span><span class="card-category-list-count">4</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/LSTM/" style="font-size: 1.1em; color: #999">LSTM</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 1.34em; color: #99a3b0">编程语言</a> <a href="/tags/MacOS/" style="font-size: 1.18em; color: #999ca1">MacOS</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 1.1em; color: #999">面试</a> <a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" style="font-size: 1.1em; color: #999">算法题</a> <a href="/tags/Java/" style="font-size: 1.5em; color: #99a9bf">Java</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 1.1em; color: #999">八股文</a> <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" style="font-size: 1.1em; color: #999">高等数学</a> <a href="/tags/GitHub/" style="font-size: 1.1em; color: #999">GitHub</a> <a href="/tags/python/" style="font-size: 1.34em; color: #99a3b0">python</a> <a href="/tags/MarkDown/" style="font-size: 1.1em; color: #999">MarkDown</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="font-size: 1.34em; color: #99a3b0">嵌入式</a> <a href="/tags/Mac-Book/" style="font-size: 1.18em; color: #999ca1">Mac Book</a> <a href="/tags/Hexo/" style="font-size: 1.18em; color: #999ca1">Hexo</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.34em; color: #99a3b0">C语言</a> <a href="/tags/%E9%9A%8F%E8%AE%B0/" style="font-size: 1.26em; color: #999fa8">随记</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/" style="font-size: 1.1em; color: #999">软件使用</a> <a href="/tags/Anaconda/" style="font-size: 1.1em; color: #999">Anaconda</a> <a href="/tags/Spring-Boot/" style="font-size: 1.1em; color: #999">Spring Boot</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 1.18em; color: #999ca1">面经</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/K60/" style="font-size: 1.26em; color: #999fa8">K60</a> <a href="/tags/Mysql/" style="font-size: 1.1em; color: #999">Mysql</a> <a href="/tags/Jupyter-Notebook/" style="font-size: 1.18em; color: #999ca1">Jupyter Notebook</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.42em; color: #99a6b7">深度学习</a> <a href="/tags/IntelliJ-IDEA/" style="font-size: 1.1em; color: #999">IntelliJ IDEA</a> <a href="/tags/IDEA/" style="font-size: 1.1em; color: #999">IDEA</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/Linux/" style="font-size: 1.34em; color: #99a3b0">Linux</a> <a href="/tags/GPU/" style="font-size: 1.1em; color: #999">GPU</a> <a href="/tags/MySql/" style="font-size: 1.1em; color: #999">MySql</a> <a href="/tags/GAN/" style="font-size: 1.1em; color: #999">GAN</a> <a href="/tags/%E6%97%A5%E5%BF%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" style="font-size: 1.26em; color: #999fa8">日志异常检测</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 1.1em; color: #999">论文</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/" title="查看更多"><i class="fas fa-angle-right"></i></a>
+    </div>
+    <ul class="card-archive-list">
+  
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/12/">
+          <span class="card-archive-list-date">十二月 2024</span>
+          <span class="card-archive-list-count">3</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2023/04/">
+          <span class="card-archive-list-date">四月 2023</span>
+          <span class="card-archive-list-count">3</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2023/03/">
+          <span class="card-archive-list-date">三月 2023</span>
+          <span class="card-archive-list-count">7</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/12/">
+          <span class="card-archive-list-date">十二月 2022</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/11/">
+          <span class="card-archive-list-date">十一月 2022</span>
+          <span class="card-archive-list-count">6</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/10/">
+          <span class="card-archive-list-date">十月 2022</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/06/">
+          <span class="card-archive-list-date">六月 2022</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/05/">
+          <span class="card-archive-list-date">五月 2022</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">43</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-12-22T13:31:20.261Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Josh Lee</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

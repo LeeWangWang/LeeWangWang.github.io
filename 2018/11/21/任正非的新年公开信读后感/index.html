@@ -1,36 +1,157 @@
-extends includes/layout.pug
-
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
-
-    article#article-container.container.post-content
-      if theme.noticeOutdate.enable && page.noticeOutdate !== false 
-        include includes/post/outdate-notice.pug
-      else
-        !=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (page.tags.length > 0 && theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
-        
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>任正非的新年公开信读后感 | The path of Learning</title><meta name="author" content="Josh Lee"><meta name="copyright" content="Josh Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="看完公开信后自己的一些想法吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任正非的新年公开信读后感">
+<meta property="og:url" content="https://leewangwang.github.io/2018/11/21/%E4%BB%BB%E6%AD%A3%E9%9D%9E%E7%9A%84%E6%96%B0%E5%B9%B4%E5%85%AC%E5%BC%80%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/index.html">
+<meta property="og:site_name" content="The path of Learning">
+<meta property="og:description" content="看完公开信后自己的一些想法吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leewangwang.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2018-11-21T06:06:22.000Z">
+<meta property="article:modified_time" content="2023-05-31T01:24:58.000Z">
+<meta property="article:author" content="Josh Lee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leewangwang.github.io/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leewangwang.github.io/2018/11/21/%E4%BB%BB%E6%AD%A3%E9%9D%9E%E7%9A%84%E6%96%B0%E5%B9%B4%E5%85%AC%E5%BC%80%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
       
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '任正非的新年公开信读后感',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="The path of Learning" type="application/atom+xml">
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">The path of Learning</span></a><a class="nav-page-title" href="/"><span class="site-name">任正非的新年公开信读后感</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">任正非的新年公开信读后感</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-11-21T06:06:22.000Z" title="发表于 2018-11-21 14:06:22">2018-11-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-31T01:24:58.000Z" title="更新于 2023-05-31 09:24:58">2023-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>看完任正非的新年公开信后，作为一名软件工程专业的学生收货颇丰，文章看似是一般领导者的官方话，但是仔细看之后，任正非对于软件工程的理解确实非常深刻，各种专业术语信手拈来，比喻恰到好处。里面对于软件开发的理解、看法、建议等都很专业，不像一般的领导者一样，只会说空话。</p>
+<p>华为从一家传统的硬件公司，靠交换机、路由器发家，一直发展到现在的软硬件同时发展的大型企业，说明华为在软件研发方面的发展方向和道路是正确的，信中这一句<code>“二十年前的IPD变革，重构了我们的研发模式，实现了从依赖个人、偶然性推出成功产品，到制度化、持续地推出高质量产品的转变。”</code>也证实了华为在软件研发道路的正确性。</p>
+<p>   华为在这三十年的发展中，从开始的“炮轰华为”到现在的“支持华为”，一个深深触动我的认知：“质量，是客户最基本的需求，因为它‘天经地义’、‘不言而喻’的性质。因此，它往往是客户永远不会拿来谈判的需求。但是，如果基本的质量关切得不到保障，客户最基本的需求得不到满足，则其它一切无从谈起。” 华为现在的产品和解决方案已经在 170 多个国家安全稳定运行，并因此积累和赢得了全球数万客户的信任。</p>
+<p>   华为现阶段开始注重软件研发，追求打造可信的高质量产品，信中这一句<code>“在确保可信的前提下，要在性能、功能、扩展性等方面做好权衡；慎重地定义我们的模块与接口，真正做到高内聚与低耦合；我们要遵循权限和攻击面最小化等安全设计原则，科学设计模块之间的隔离与接口，提升安全性。”</code>我们平时经常在课本或者教材书上看到，但是从毕业的师哥和师姐那里听到的都是他们所在的公司很少关注这些，老师们上课也和我们说过，一般的中性和小型公司都是以结果为主，公司高层一般在乎的都是什么时候拿到产品，而不是产品开发的过程，一般只有大公司会强调软件研发的规范。软件工程从出现到现在已经很成熟了，从任何一个软件的需求到最后的交付，都肯定会有一个适合的流程，只要按照这个流程就能开发出理论上完美的软件，但是人本身就是一种变量，因此完美的软件从未被研发出。</p>
+<p>   软件开发最重要的还是遵循规范，正如信中这一句<code>“我们要从最基础的编码质量做起，视高质量代码为尊严和个人声誉。代码就像是高楼大厦的一砖一瓦，没有高质量的代码，可信的产品就是空中楼阁。我们要优化并遵循公司各种编程规范，遵从架构与设计原则，熟练使用各种编程库和API，编写出简洁、规范、可读性强、健壮安全的代码。”</code>充分的说明了规范行在软件开发中的重要性。正如人们常说的一句话‘没有规矩，不成方圆’，软件开发也是如此，我们只有严格遵循相应的规范，才能开发出满足客户需求的软件。软件失败的原因85%是人为因素，客户、项目经理、需求分析师、程序员等都是软件研发中的重要组成部分，只要有任意一部分没有按照规范操作，都会增加软件研发的复杂性，从而降低软件的安全性，最后研发的软件不满足客户的需求被拒收。</p>
+<p>   进行提升软件工程能力与实践的变革的公司并不少，但是很少有能够进行实际行动的，很多都是在文字上进行变革，很少落到实处，从信中这一句<code>“由轮值董事长徐直军总负责,公司初始投入20亿美元,计划用5年时间，在ICT基础设施领域实现为客户打造可信的高质量产品的目标。”</code>可以看出，华为是用实际行动来进行软件工程能力与实践的变革。空头话谁都会说，但是真正能做到的公司只是很少一部分，最终成功的也就是这部分真正进行变革的公司。</p>
+<p>   读完这封信后，在信中发现自己很多的不足正如信中所描述的一样，以后需要加强自身硬实力，严格按照正确的软件工程规范来学习、写代码等。等我毕业以后，刚开始可能也会和师哥师姐一样，进入的公司不要求规范，但是自己并不能和他们一样，要严格的要求自己，只有这样做，才能增加自己的资本，在将来面适大公司的时候给自己增加更多的机会。</p>
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://leewangwang.github.io">Josh Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://leewangwang.github.io/2018/11/21/%E4%BB%BB%E6%AD%A3%E9%9D%9E%E7%9A%84%E6%96%B0%E5%B9%B4%E5%85%AC%E5%BC%80%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/">https://leewangwang.github.io/2018/11/21/%E4%BB%BB%E6%AD%A3%E9%9D%9E%E7%9A%84%E6%96%B0%E5%B9%B4%E5%85%AC%E5%BC%80%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://leewangwang.github.io" target="_blank">The path of Learning</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2018/12/26/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Java%E7%AC%94%E8%AF%95%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B/" title="Java基础——Java笔试常考题型"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Java基础——Java笔试常考题型</div></div><div class="info-2"><div class="info-item-1">1、作用域public,private,protected,以及不写时的区别答：区别如下，不写时默认缺省    作用域 同一类 同一包 不同包的子类 所有类    public ✔️ ✔️ ✔️ ✔️   private ✔️ ✔️ ✔️ ✔️   缺省 ✔️ ✔️ ❌ ❌   protected ✔️ ❌ ❌ ❌   2、Anonymous Inner Class (匿名内部类)是否可以继承(extends)其他类，是否可以implements(实现)interface(接口)答：匿名内部类是没有名字的内部类，不能extends其他类，但一个内部类可以作为一个接口，由另一个内部类实现。 3、Static Nested Class 和 Inner Class的不同答：Nested Class （一般是C++的说法）， Inner Class(一般是JAVA的说法)。 Java内部类与C++嵌套类最大的不同就在于                 是否有指向外部的引用上。注： 静态内部类（Inner Class）意味着1创建一个static内部类的对象，不需要一个外部类对     ...</div></div></div></a><a class="pagination-related" href="/2018/09/24/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%89%B9%E7%82%B9/" title="Java基础——抽象类的概念及特点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Java基础——抽象类的概念及特点</div></div><div class="info-2"><div class="info-item-1">1.如何定义抽象类、抽象方法 ​	abstract关键字修饰 2.抽象类无法被实例化 ​	因为它不是具体的类。（但是有构造方法） 3.抽象类有构造方法，是给子类创建对象的 4.抽象类中可以定义抽象方法 ​	语法：在方法的修饰列表中添加abstract关键字，并且以“;”结束，不能带有“{}”​	public abstract void...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Josh Lee</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/hello-world/" title="Hello World">Hello World</a><time datetime="2024-12-22T12:48:53.810Z" title="发表于 2024-12-22 20:48:53">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/%E5%85%A5%E8%81%8C%E6%97%A5%E8%AE%B0/" title="入职日记">入职日记</a><time datetime="2024-12-22T10:19:42.000Z" title="发表于 2024-12-22 18:19:42">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/README/" title="无标题">无标题</a><time datetime="2024-12-22T09:39:39.322Z" title="发表于 2024-12-22 17:39:39">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" title="面试记录——面试问题">面试记录——面试问题</a><time datetime="2023-04-03T01:59:41.000Z" title="发表于 2023-04-03 09:59:41">2023-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%A5%E5%BF%97%E5%BA%8F%E5%88%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" title="基于深度学习的日志序列异常检测">基于深度学习的日志序列异常检测</a><time datetime="2023-04-03T01:27:24.000Z" title="发表于 2023-04-03 09:27:24">2023-04-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Josh Lee</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

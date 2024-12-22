@@ -1,36 +1,158 @@
-extends includes/layout.pug
-
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
-
-    article#article-container.container.post-content
-      if theme.noticeOutdate.enable && page.noticeOutdate !== false 
-        include includes/post/outdate-notice.pug
-      else
-        !=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (page.tags.length > 0 && theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
-        
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>基于MSP430F5529的超声波测距源码，自己写的可能不对，仅供参考 | The path of Learning</title><meta name="author" content="Josh Lee"><meta name="copyright" content="Josh Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基于51单片机的超声波测距模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于MSP430F5529的超声波测距源码，自己写的可能不对，仅供参考">
+<meta property="og:url" content="https://leewangwang.github.io/2018/07/23/%E5%9F%BA%E4%BA%8EMSP430F5529%E7%9A%84%E8%B6%85%E5%A3%B0%E6%B3%A2%E6%B5%8B%E8%B7%9D%E6%BA%90%E7%A0%81%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%E5%8F%AF%E8%83%BD%E4%B8%8D%E5%AF%B9%EF%BC%8C%E4%BB%85%E4%BE%9B%E5%8F%82%E8%80%83/index.html">
+<meta property="og:site_name" content="The path of Learning">
+<meta property="og:description" content="基于51单片机的超声波测距模块">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leewangwang.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2018-07-23T01:49:27.000Z">
+<meta property="article:modified_time" content="2023-05-31T01:24:58.000Z">
+<meta property="article:author" content="Josh Lee">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="嵌入式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leewangwang.github.io/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leewangwang.github.io/2018/07/23/%E5%9F%BA%E4%BA%8EMSP430F5529%E7%9A%84%E8%B6%85%E5%A3%B0%E6%B3%A2%E6%B5%8B%E8%B7%9D%E6%BA%90%E7%A0%81%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%E5%8F%AF%E8%83%BD%E4%B8%8D%E5%AF%B9%EF%BC%8C%E4%BB%85%E4%BE%9B%E5%8F%82%E8%80%83/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
       
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基于MSP430F5529的超声波测距源码，自己写的可能不对，仅供参考',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="The path of Learning" type="application/atom+xml">
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">The path of Learning</span></a><a class="nav-page-title" href="/"><span class="site-name">基于MSP430F5529的超声波测距源码，自己写的可能不对，仅供参考</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">基于MSP430F5529的超声波测距源码，自己写的可能不对，仅供参考</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-07-23T01:49:27.000Z" title="发表于 2018-07-23 09:49:27">2018-07-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-31T01:24:58.000Z" title="更新于 2023-05-31 09:24:58">2023-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>超声波测距的原理大家Google一下就应该知道了，因此基于<code>MSP430</code>的超声波主要是调整时钟就行了。</p>
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;msp430f5529.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;usart.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;stdio.h&quot;</span></span><br> <br><span class="hljs-type">double</span> a = <span class="hljs-number">1.111</span>;       <span class="hljs-comment">//距离</span><br><span class="hljs-type">long</span> <span class="hljs-type">long</span> next;         <span class="hljs-comment">//寄存器值</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * P3.6与TB0.6相连接，输出信号</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">int</span> tim = <span class="hljs-number">0</span>;        <span class="hljs-comment">//溢出次数</span><br> <br><span class="hljs-type">void</span> <span class="hljs-title function_">SetVcoreUp</span> <span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> level)</span><br>&#123;<br>  PMMCTL0_H = PMMPW_H;<br>  SVSMHCTL = SVSHE + SVSHRVL0 * level + SVMHE + SVSMHRRL0 * level;<br>  SVSMLCTL = SVSLE + SVMLE + SVSMLRRL0 * level;<br>  <span class="hljs-keyword">while</span> ((PMMIFG &amp; SVSMLDLYIFG) == <span class="hljs-number">0</span>);<br>  PMMIFG &amp;= ~(SVMLVLRIFG + SVMLIFG);<br>  PMMCTL0_L = PMMCOREV0 * level;<br>  <span class="hljs-keyword">if</span> ((PMMIFG &amp; SVMLIFG))<br>    <span class="hljs-keyword">while</span> ((PMMIFG &amp; SVMLVLRIFG) == <span class="hljs-number">0</span>);<br>  SVSMLCTL = SVSLE + SVSLRVL0 * level + SVMLE + SVSMLRRL0 * level;<br>  PMMCTL0_H = <span class="hljs-number">0x00</span>;<br>&#125;<br> <br><span class="hljs-type">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>  <span class="hljs-keyword">volatile</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> i;<br>  WDTCTL = WDTPW+WDTHOLD;                   <span class="hljs-comment">// Stop WDT</span><br>  P1DIR |= BIT1;                            <span class="hljs-comment">// P1.1 output</span><br>  P1DIR |= BIT0;                            <span class="hljs-comment">// ACLK set out to pins</span><br>  P1SEL |= BIT0;<br>  P2DIR |= BIT2;                            <span class="hljs-comment">// SMCLK set out to pins</span><br>  P2SEL |= BIT2;<br>  P7DIR |= BIT7;                            <span class="hljs-comment">// MCLK set out to pins</span><br>  P7SEL |= BIT7;<br>  <span class="hljs-comment">// Increase Vcore setting to level3 to support fsystem=25MHz</span><br>  <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> Change core voltage one level at a time..</span><br>  SetVcoreUp (<span class="hljs-number">0x01</span>);<br>  SetVcoreUp (<span class="hljs-number">0x02</span>);<br>  SetVcoreUp (<span class="hljs-number">0x03</span>);<br>  UCSCTL3 = SELREF_2;                       <span class="hljs-comment">// Set DCO FLL reference = REFO</span><br>  UCSCTL4 |= SELA_2;                        <span class="hljs-comment">// Set ACLK = REFO</span><br>  __bis_SR_register(SCG0);                  <span class="hljs-comment">// Disable the FLL control loop</span><br>  UCSCTL0 = <span class="hljs-number">0x0000</span>;                         <span class="hljs-comment">// Set lowest possible DCOx, MODx</span><br>  UCSCTL1 = DCORSEL_7;                      <span class="hljs-comment">// Select DCO range 50MHz operation</span><br>  UCSCTL2 = FLLD_0 + <span class="hljs-number">762</span>;                   <span class="hljs-comment">// Set DCO Multiplier for 25MHz</span><br>  __bic_SR_register(SCG0);                  <span class="hljs-comment">// Enable the FLL control loop</span><br> <br>  __delay_cycles(<span class="hljs-number">782000</span>);<br>  <span class="hljs-keyword">do</span><br>  &#123;<br>    UCSCTL7 &amp;= ~(XT2OFFG + XT1LFOFFG + DCOFFG);<br>                                            <span class="hljs-comment">// Clear XT2,XT1,DCO fault flags</span><br>    SFRIFG1 &amp;= ~OFIFG;                      <span class="hljs-comment">// Clear fault flags</span><br>  &#125;<span class="hljs-keyword">while</span> (SFRIFG1&amp;OFIFG);                   <span class="hljs-comment">// Test oscillator fault flag</span><br>  P6DIR |= BIT0;<br> <br>&#125;<br> <br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-built_in">set</span>();<br>    WDTCTL = WDTPW+WDTHOLD;                   <span class="hljs-comment">// Stop WDT</span><br>    UART_Init();                <span class="hljs-comment">//串口初始化</span><br> <br>    P3DIR |= BIT6;        <br>    P3OUT &amp;=~ BIT6;     <br> <br>    P3DIR &amp;=~ BIT5;      <br>    P3IN &amp;=~ BIT5;       <br> <br>    P2DIR |= <span class="hljs-number">0X00</span>;   <br>    P2IFG = <span class="hljs-number">0X00</span>;  <br>    P2IE = BIT0;    <br>    P2IES = BIT0;  <br>    P2IN = BIT0;  <br>    P2OUT = BIT0;    <br>    P2REN = BIT0;   <br> <br>    __enable_interrupt();     <br> <br>    P1SEL |= BIT4;    <br>    P1DIR |= BIT4;    <br>    P1DS |= BIT4;   <br>    P1OUT &amp;=~ BIT4;   <br> <br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>    &#123;<br>        P3OUT = BIT6;  <br>        __delay_cycles(<span class="hljs-number">4</span>);<br>        P3OUT &amp;=~ BIT6;<br>        P2OUT &amp;=~ BIT0;<br>        __delay_cycles(<span class="hljs-number">40000</span>);<br>    &#125;<br>&#125;<br> <br> <br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> vector=PORT2_VECTOR  </span><br> <br>__interrupt <span class="hljs-type">void</span> <span class="hljs-title function_">Port2_ISR</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br> <br>    <span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> temp;   <br>    <span class="hljs-keyword">if</span>((P2IN&amp;<span class="hljs-number">0X01</span>)!=<span class="hljs-number">0X01</span>)<br>    &#123;<br>        temp=P2IFG;     <br>        P2IFG=<span class="hljs-number">0x00</span>; <br>        <span class="hljs-keyword">if</span>(temp==<span class="hljs-number">0x01</span>)<br>        &#123;<br>            P2OUT = BIT0;  <br>            <span class="hljs-comment">//开始计时</span><br>            TA0CCTL0 = CCIE;<br>            TA0CCR0 = <span class="hljs-number">20000</span>;<br>            TA0CTL = TASSEL_2 + MC_1 + TACLR;      <br>            __bis_SR_register(GIE);<br>            <span class="hljs-keyword">while</span>((P3IN&amp;<span class="hljs-number">0X20</span>) == <span class="hljs-number">0X20</span>);<br>            <span class="hljs-comment">//a + TA0R</span><br>            TA0CTL = MC0;<br>            <span class="hljs-comment">//next = TA0R;</span><br> <br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;next = %ld\n&quot;</span>,TA0R);<br> <br>        &#125;<br>    &#125;<br>&#125;<br> <br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> vector = TIMER0_A0_VECTOR</span><br>__interrupt <span class="hljs-type">void</span> <span class="hljs-title function_">TIMER0_A0_ISR</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br>    tim++;<br>    <span class="hljs-keyword">if</span>(a&gt;<span class="hljs-number">10</span>)<br>    &#123;<br>        tim = <span class="hljs-number">0</span>;<br>        P3OUT = BIT6;  <br>        __delay_cycles(<span class="hljs-number">4</span>); <br>        P3OUT &amp;=~ BIT6;<br>    &#125;<br> <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://leewangwang.github.io">Josh Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://leewangwang.github.io/2018/07/23/%E5%9F%BA%E4%BA%8EMSP430F5529%E7%9A%84%E8%B6%85%E5%A3%B0%E6%B3%A2%E6%B5%8B%E8%B7%9D%E6%BA%90%E7%A0%81%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%E5%8F%AF%E8%83%BD%E4%B8%8D%E5%AF%B9%EF%BC%8C%E4%BB%85%E4%BE%9B%E5%8F%82%E8%80%83/">https://leewangwang.github.io/2018/07/23/%E5%9F%BA%E4%BA%8EMSP430F5529%E7%9A%84%E8%B6%85%E5%A3%B0%E6%B3%A2%E6%B5%8B%E8%B7%9D%E6%BA%90%E7%A0%81%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84%E5%8F%AF%E8%83%BD%E4%B8%8D%E5%AF%B9%EF%BC%8C%E4%BB%85%E4%BE%9B%E5%8F%82%E8%80%83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://leewangwang.github.io" target="_blank">The path of Learning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/C%E8%AF%AD%E8%A8%80/">C语言</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2018/09/18/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94final%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/" title="Java基础——final关键字详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Java基础——final关键字详解</div></div><div class="info-2"><div class="info-item-1">Java语言基础之final  final是一个修饰符，可以修饰类、方法、变量 final修饰的类无法继承 final修饰的方法无法被重写 final修饰的局部变量，一旦赋值，不可再改变 final修饰的成员变量必须手动初始化，或者构造方法完成之前 final修饰的成员变量一般与static联用  例：public static final double PI &#x3D; 3.14;  所有的常量必须大写 其实这样的原因的就是给一些固定的数据起个阅读性较强的名称。 不加 final 修饰不是也可以使用吗？ 那么这个值是一个变量，是可以更改的。加了 final，程序更为严谨。常量名称定义时，有规范，所有字母都大写，如果由多个单词组成，中间用 _连接。 public class A &#123;		final int a;		public A()&#123;		a = 10;	&#125;		public final void m1() &#123;		final int i = 100;		//不能重新赋值		//i = 100;	&#125;;&#125;/*class B...</div></div></div></a><a class="pagination-related" href="/2018/07/02/%E5%AD%90%E5%9B%BE%E5%8F%8A%E8%A1%A5%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" title="子图及补图的基本概念"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">子图及补图的基本概念</div></div><div class="info-2"><div class="info-item-1"> 子图：从原图中删去一些点或删去一些线或既删去一些点又删去一些线，剩下的部分（当然必须仍然是图）。允许两种极端情况：什么都不删；删去所有点和所有线。 真子图：同“子图”，但不允许什么都不删。 生成子图：同“子图”，但只允许删去线，不允许删去点。 补图：与原图互补构成完全图。   </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2019/03/03/K60%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E7%A8%8B%E5%BA%8F%EF%BC%88J-Link%E8%A7%A3%E9%94%81%EF%BC%89/" title="K60学习笔记（2）——无法下载程序（J-Link解锁）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-03-03</div><div class="info-item-2">K60学习笔记（2）——无法下载程序（J-Link解锁）</div></div><div class="info-2"><div class="info-item-1">K60上锁后是下载不了程序的，因此就需要解锁芯片 上锁原因： ​	1.很可能是占用了Jlink的引脚及：PTA1 - PTA5​	2.下载线连接不稳定​	3.Jlink坏了，换一个试试​	4.电脑驱动版本问题​	5.IAR软件配置问题 如果Jlink锁了就打开JlinkCommonder，然后按住复位键输入unlock kinetis 回车  </div></div></div></a><a class="pagination-related" href="/2019/03/03/K60%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" title="K60学习笔记（1）——启动文件分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-03-03</div><div class="info-item-2">K60学习笔记（1）——启动文件分析</div></div><div class="info-2"><div class="info-item-1">初始化函数 上电复位 中断向量表：在vectors.c里面定义，在vectors.h文件里。     在vectors.h里面两行: #define VECTOR_000 (vector_entry)__BOOT_STACK_ADDRESS // ARM core Initial Supervisor SP  #define VECTOR_001 Reset_Handler // 0x0000_0004 1 - ARM core Initial Program Counter  分别定义了sp栈指针，和复位中断（根据字义便知道意思）  Reset_Handler：在vectors.h里面有这个函数：extern void Reset_Handler (void);              ...</div></div></div></a><a class="pagination-related" href="/2019/03/03/K60%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%E4%B8%80%E4%BA%9B%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9/" title="K60学习笔记（3）——一些些需要注意的地方"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-03-03</div><div class="info-item-2">K60学习笔记（3）——一些些需要注意的地方</div></div><div class="info-2"><div class="info-item-1">1.为什么不是每个模块的引脚都是32位？因为正好够用才合适，这样才能减少体积和芯片价格  2.GPIO和PORT的区别：PORT 是将引脚复用到其他模块上。二GPIO只能用于普通IO口的输入输出  3.const和volatileconst修饰只读变量，限定了变量不能被改变volatile:声明变量为易变的，它随时可能被修改  4.宏定义封装：宏定义封装，会把代码直接展开，而不会想函数调用那样需要入栈出栈等操作，所以宏定义封装一般占用很多的空间，即空间换时间。一般在代码非常短的情况下，才使用。如果一行的语句太长，用续行符‘\’,后面只能回车，不能有其他符号  5.按键扫描的模块：   ADC扫描：   优点：仅需一个I\O口ADC就可以实现多个按键  缺点：不支持多个按键同时按下。  方法：电阻分压，不同按键产生不同的电压 。   GPIO按键扫描：独立式和矩阵式按键扫描的方式分为：循环查询，定时查询，中断响应   循环查询：在一个循环中不断扫描，获取按键值   优点：软件处理简单  缺点：消抖处理浪费宝贵的CPU时间，实时性不足   定时扫描：...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Josh Lee</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/hello-world/" title="Hello World">Hello World</a><time datetime="2024-12-22T12:48:53.810Z" title="发表于 2024-12-22 20:48:53">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/%E5%85%A5%E8%81%8C%E6%97%A5%E8%AE%B0/" title="入职日记">入职日记</a><time datetime="2024-12-22T10:19:42.000Z" title="发表于 2024-12-22 18:19:42">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/README/" title="无标题">无标题</a><time datetime="2024-12-22T09:39:39.322Z" title="发表于 2024-12-22 17:39:39">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" title="面试记录——面试问题">面试记录——面试问题</a><time datetime="2023-04-03T01:59:41.000Z" title="发表于 2023-04-03 09:59:41">2023-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%A5%E5%BF%97%E5%BA%8F%E5%88%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" title="基于深度学习的日志序列异常检测">基于深度学习的日志序列异常检测</a><time datetime="2023-04-03T01:27:24.000Z" title="发表于 2023-04-03 09:27:24">2023-04-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Josh Lee</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

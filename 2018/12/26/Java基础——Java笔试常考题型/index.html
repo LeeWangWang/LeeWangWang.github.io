@@ -1,36 +1,321 @@
-extends includes/layout.pug
-
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
-
-    article#article-container.container.post-content
-      if theme.noticeOutdate.enable && page.noticeOutdate !== false 
-        include includes/post/outdate-notice.pug
-      else
-        !=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (page.tags.length > 0 && theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
-        
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java基础——Java笔试常考题型 | The path of Learning</title><meta name="author" content="Josh Lee"><meta name="copyright" content="Josh Lee"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="把一些常见问题记录下来，方便自己以后查找">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础——Java笔试常考题型">
+<meta property="og:url" content="https://leewangwang.github.io/2018/12/26/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Java%E7%AC%94%E8%AF%95%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B/index.html">
+<meta property="og:site_name" content="The path of Learning">
+<meta property="og:description" content="把一些常见问题记录下来，方便自己以后查找">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leewangwang.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2018-12-26T06:17:53.000Z">
+<meta property="article:modified_time" content="2023-05-31T01:24:58.000Z">
+<meta property="article:author" content="Josh Lee">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://leewangwang.github.io/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leewangwang.github.io/2018/12/26/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Java%E7%AC%94%E8%AF%95%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
       
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java基础——Java笔试常考题型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="The path of Learning" type="application/atom+xml">
+</head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">The path of Learning</span></a><a class="nav-page-title" href="/"><span class="site-name">Java基础——Java笔试常考题型</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">Java基础——Java笔试常考题型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-12-26T06:17:53.000Z" title="发表于 2018-12-26 14:17:53">2018-12-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-31T01:24:58.000Z" title="更新于 2023-05-31 09:24:58">2023-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><strong>1、作用域public,private,protected,以及不写时的区别</strong><br>答：区别如下，不写时默认缺省</p>
+<table>
+<thead>
+<tr>
+<th>作用域</th>
+<th>同一类</th>
+<th>同一包</th>
+<th>不同包的子类</th>
+<th>所有类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>private</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>✔️</td>
+</tr>
+<tr>
+<td>缺省</td>
+<td>✔️</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>✔️</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<p><strong>2、Anonymous Inner Class (匿名内部类)是否可以继承(extends)其他类，是否可以implements(实现)interface(接口)</strong><br>答：匿名内部类是没有名字的内部类，不能extends其他类，但一个内部类可以作为一个接口，由另一个内部类实现。</p>
+<p><strong>3、Static Nested Class 和 Inner Class的不同</strong><br>答：Nested Class （一般是C++的说法）， Inner Class(一般是JAVA的说法)。 Java内部类与C++嵌套类最大的不同就在于                 是否有指向外部的引用上。注： 静态内部类（Inner Class）意味着1创建一个static内部类的对象，不需要一个外部类对               象， 2不能从一个static内部类的一个对象访问一个外部类对象。</p>
+<p><strong>4、&amp;和&amp;&amp;的区别</strong><br>答：&amp;是位运算符，表示按位与运算；&amp;&amp;是逻辑运算符，表示逻辑与（and）</p>
+<p><strong>5、Collection和Collections的区别</strong><br>答：Collection是集合类的上级接口，继承与他的借口主要有Set和List<br>Collections是针对集合类的一个帮助类，它提供一系列静态方法实现对各种集合的搜索、排序、线程安全化等操作。</p>
+<p><strong>6、什么时候用assert</strong><br>答：assertion(断言)在软件开发中是一种常用的调试方式，很多开发语言中都支持这种机制。在实现中，assertion就是在程序中的一条语句，它对一个boolean表达式进行检查，一个正确程序必须保证这个boolean表达式的值为true；如果该值为false，说明程序已经处于不正确的状态下，系统将给出警告或退出。一般来说， assertion用于保证程序最基本、关键的正确性。assertion检查通常在开发和测试时开启。为了提高性能，在软件发布后， assertion检查通常是关闭的</p>
+<p><strong>7、String s &#x3D; new String(“xyz”);创建了几个String Object</strong><br>答：两个，一个字符对象，一个字符引用对象</p>
+<p><strong>8、Math.round(11.5)等於多少? Math.round(-11.5)等於多少</strong><br>答：Math.round(11.5) &#x3D;&#x3D; 12；Math.round(-11.5) &#x3D;&#x3D; -11；round方法返回与参数最接近的长整数，参数加1&#x2F;2后求其floor</p>
+<p><strong>9、short s1 &#x3D; 1; s1 &#x3D; s1 + 1;有什么错? short s1 &#x3D; 1; s1 +&#x3D; 1;有什么错</strong><br>答：short s1 &#x3D; 1; s1 &#x3D; s1 + 1; （s1+1运算结果是int型，需要强制转换类型） short s1 &#x3D; 1; s1 +&#x3D; 1;（可以正确编译）</p>
+<p><strong>10、Java有没有goto</strong><br>答：java中的保留字，现在没有在java中使用</p>
+<p><strong>11、数组有没有length()这个方法? String有没有length()这个方法</strong><br>答：数组没有length()这个方法，有length的属性。 String有有length()这个方法</p>
+<p><strong>12、Overload和Override的区别。 Overloaded的方法是否可以改变返回值的类型</strong><br>答：方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，  重载Overloading是一个类中多态性的一种表现。如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 (Overriding)。子类的对象使用这个方法时，将调用子类中的定义，对它而言，父类中的定义如同被”蔽”了。如果在一个类中定义了多个同名的方法，它们或有不同的参数个数或有不同的参数类型，则称为方法的重载(Overloading)。Overloaded的方法是可以改变返回值的类型</p>
+<p><strong>13、Set里的元素是不能重复的，那么用什么方法来区分重复与否呢? 是用还是equals()? 它们有何区别</strong><br>答：Set里的元素是不能重复的，那么用iterator()方法来区分重复与否。 equals()是判读两个Set是否相等equals()和方法决定引用值是否指向同一对象equals()在类中被覆盖，为的是当两个分离的对象的内容和类型相配的话，返回真值</p>
+<p><strong>14、给我一个你最常见到的runtime exception</strong><br>答：常见的运行时异常有如下这		</p>
+<table>
+<thead>
+<tr>
+<th>异常类型</th>
+<th>异常描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arithmetic  Exception</td>
+<td>算术异常</td>
+</tr>
+<tr>
+<td>BufferOverflow  Exception</td>
+<td>缓冲区溢出异常</td>
+</tr>
+<tr>
+<td>NullPointer  Exception</td>
+<td>空指针引用异常</td>
+</tr>
+<tr>
+<td>ClassCast  Exception</td>
+<td>类型强制转换异常</td>
+</tr>
+<tr>
+<td>IllegalArgument  Exception</td>
+<td>传递非法参数异常</td>
+</tr>
+<tr>
+<td>IndexOutOfBounds  Exception</td>
+<td>下标越界异常</td>
+</tr>
+<tr>
+<td>NumberFormat  Exception</td>
+<td>数字格式异常</td>
+</tr>
+<tr>
+<td>Security  Exception</td>
+<td>安全异常</td>
+</tr>
+<tr>
+<td>IllegalPathState  Exception</td>
+<td>非法的路径声明异常</td>
+</tr>
+<tr>
+<td>SQL  Exception</td>
+<td>数据库异常</td>
+</tr>
+<tr>
+<td>FileNotFound  Exception</td>
+<td>文件未找到异常</td>
+</tr>
+<tr>
+<td>EmptyStack  Exception</td>
+<td>空栈异常</td>
+</tr>
+<tr>
+<td>IllegalState  Exception</td>
+<td>非法声明异常</td>
+</tr>
+<tr>
+<td>IO  Exception</td>
+<td>输入输出异常</td>
+</tr>
+<tr>
+<td>NegativeArraySize  Exception</td>
+<td>数组下标异常</td>
+</tr>
+<tr>
+<td>NoSuchElement  Exception</td>
+<td>未找到方法异常</td>
+</tr>
+</tbody></table>
+<p><strong>15、error和exception有什么区别</strong><br>答：error 表示恢复不是不可能但很困难的情况下的一种严重问题。比如说内存溢出。不可能指望程序能处理这样的情况</p>
+<p><strong>16、List, Set, Map是否继承自Collection接口</strong><br>答：List， Set是， Map不是</p>
+<p><strong>17、abstract class和interface有什么区别</strong><br>答：声明方法的存在而不去实现它的类被叫做抽象类（abstract class），它用于要创建一个体现某些基本行为的类，并为该类声明方法，但不能在该类中实现该类的情况。不能创建abstract 类的实例。然而可以创建一个变量，其类型是一个抽象类，并让它指向具体子类的一个实例。不能有抽象构造函数或抽象静态方法。 Abstract 类的子类为它们父类中的所有抽象方法提供实现，否则它们也是抽象类为。取而代之，在子类中实现该方法。知道其行为的其它类可以在类中实现这些方法接口（interface）是抽象类的变体。在接口中，所有方法都是抽象的。多继承性可通过实现这样的接口而获得。接口中的所有方法都是抽象的，没有一个有程序体。接口只可以定义static final成员变量。接口的实现与子类相似，除了该实现类不能从接口定义中继承行为。当类实现特殊接口时，它定义（即将程序体给予）所有这种接口的方法。然后，它可以在实现了该接口的类的任何对象上调用接口的方法。由于有抽象类，它允许使用接口名作为引用变量的类型。通常的动态联编将生效。引用可以转换到接口类型或从接口类型转换， instanceof 运算符可以用来决定某对象的类是否实现了接口</p>
+<p><strong>18、abstract的method是否可同时是static,是否可同时是native，是否可同时是synchronized</strong><br>答：都不能</p>
+<p><strong>19、接口是否可继承接口? 抽象类是否可实现(implements)接口? 抽象类是否可继承实体类(concrete class)</strong><br>答：接口可以继承接口。抽象类可以实现(implements)接口，抽象类是否可继承实体类，但前提是实体类必须有明确的构造函数</p>
+<p><strong>20、构造器Constructor是否可被override</strong><br>答：构造器Constructor不能被继承，因此不能重写Overriding，但可以被重载Overloading</p>
+<p><strong>21、是否可以继承String类</strong><br>答：String类是final类故不可以继承</p>
+<p><strong>22、try {}里有一个return语句，那么紧跟在这个try后的finally{}里的code会不会被执行，什么时候被执行，在return前还是后</strong><br>答：会执行，在return前执行</p>
+<p><strong>23、用最有效率的方法算出2乘以8等於几</strong><br>答：2&lt;&lt;8</p>
+<p><strong>24、两个对象值相同(x.equals(y) &#x3D;&#x3D; true)，但却可有不同的hash code，这句话对不对</strong><br>答：不对，有相同的hash code</p>
+<p><strong>25、当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递</strong><br>答：是值传递。 Java 编程语言只有值传递参数。当一个对象实例作为一个参数被传递到方法中时，参数的值就是对该对象的引用。对象的内容可以在被调用的方法中改变，但对象的引用是永远不会改变的</p>
+<p><strong>26、swtich是否能作用在byte上，是否能作用在long上，是否能作用在String上</strong><br>答：witch（expr1）中， expr1是一个整数表达式。因此传递给 switch 和 case 语句的参数应该是 int、 short、 char 或者 byte。 long,string 都不能作用于swtich</p>
+<p><strong>27、ArrayList和Vector的区别,HashMap和Hashtable的区别</strong><br>答：同步性:Vector是线程安全的，也就是说是同步的，而ArrayList是线程序不安全的，不是同步的<br>   数据增长:当需要增长时,Vector默认增长为原来一培，而ArrayList却是原来的一半就HashMap与HashTable主要从三方面来说<br>    1.历史原因:Hashtable是基于陈旧的Dictionary类的， HashMap是Java 1.2引进的Map接口的一个实现<br>    2.同步性:Hashtable是线程安全的，也就是说是同步的，而HashMap是线程序不安全的，不是同步的<br>    3.值：只有HashMap可以让你将空值作为一个表的条目的key或valu</p>
+<p><strong>28、char型变量中能不能存贮一个中文汉字?为什么?</strong><br>答：是能够定义成为一个中文的，因为java中以unicode编码，一个char占16个字节，所以放一个中文是没问题的</p>
+<p><strong>29、 GC是什么? 为什么要有GC</strong><br>答： GC是垃圾收集的意思（Gabage Collection） ,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃， Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的， Java语言没有提供释放已分配内存的显示操作方法。</p>
+<p><strong>30、 float型float f &#x3D;&#x3D; 3.4是否正确?</strong><br>答：不正确。精度不准确,应该用强制类型转换，如下所示： float f&#x3D;(float)3.4</p>
+<p><strong>31、抽象类与接口？</strong><br>答：抽象类与接口都用于抽象，但是抽象类可以有自己的部分实现，而接口则完全是一个标识(同时有多重继承的功能)。<br>JAVA类实现序例化的方法是实现java.io.Serializable接口Collection框架中实现比较要实现Comparable 接口和 Comparator 接口</p>
+<p><strong>32、 STRING与STRINGBUFFER的区别。</strong><br>答：STRING的长度是不可变的， STRINGBUFFER的长度是可变的。如果你对字符串中的内容经常进行操作，特别是内容要修改时，那么使用StringBuffer，如果最后需要String，那么使用StringBuffer的toString()方法</p>
+<p><strong>33、谈谈final, finally, finalize的区别</strong><br>答：final—修饰符（关键字）如果一个类被声明为final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为abstract的，又被声明为final的。将变量或方法声明为final，可以保证它们在使用中不被改变。被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final的方法也同样只能使用，不能重载<br>finally—再异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch子句就会执行，然后控制就会进入 finally 块（如果有的话）<br>finalize—方法名。 Java 技术允许使用 finalize()方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的。它是在 Object 类中定义的，因此所有的类都继承了它。子类覆盖 finalize()方法以整理系统资源或者执行其他清理工作。 finalize() 方法是在垃圾收集器删除对象之前对这个对象调用的</p>
+<p><strong>34、面向对象的特征有哪些方面</strong><br>答：主要有以下四方面：<br>1.抽象：<br>    抽象就是忽略一个主题中与当前目标无关的那些方面，以便更充分地注意与当前目标有关的方面。抽象并不打算了解全部问题，而只是选择其中的一部分，暂时不用部分细节。抽象包括两个方面，一是过程抽象，二是数据抽象。<br>2.继承：<br>    继承是一种联结类的层次模型，并且允许和鼓励类的重用，它提供了一种明确表述共性的方法。对象的一个新类可以从现有的类中派生，这个过程称为类继承。新类继承了原始类的特性，新类称为原始类的派生类（子类），而原始类称为新类的基类（父类）。派生类可以从它的基类那里继承方法和实例变量，并且类可以修改或增加新的方法使之更适合特殊的需要。<br>3.封装：<br>    封装是把过程和数据包围起来，对数据的访问只能通过已定义的界面。面向对象计算始于这个基本概念，即现实世界可以被描绘成一系列完全自治、封装的对象，这些对象通过一个受保护的接口访问其他对象。</p>
+<p>4.多态性：<br>    多态性是指允许不同类的对象对同一消息作出响应。多态性包括参数化多态性和包含多态性。多态性语言具有灵活、抽象、行为共享、代码共享的优势，很好的解决了应用程序函数同名问题。</p>
+<p><strong>35、 String是最基本的数据类型吗</strong><br>答：基本数据类型包括byte、 int、 char、 long、 float、 double、 boolean和short。java.lang.String类是final类型的，因此不可以继承这个类、不能修改这个类。为了提高效率节省空间，我们应该用StringBuffer类</p>
+<p><strong>36、 int 和 Integer 有什么区别</strong><br>答：Java 提供两种不同的类型：引用类型和原始类型（或内置类型）。 Int是java的原始数据类型， Integer是java为int提供的封装类。 Java为每个原始类型提供了封装类。原始类型封装类, booleanBoolean, charCharacter, byteByte, shortShort, intInteger, longLong, floatFloat, doubleDouble引用类型和原始类型的行为完全不同，并且它们具有不同的语义。引用类型和原始类型具有不同的特征和用法，它们包括：大小和速度问题，这种类型以哪种类型的数据结构存储，当引用类型和原始类型用作某个类的实例数据时所指定的缺省值。对象引用实例变量的缺省值为 null，而原始类型实例变量的缺省值与它们的类型有关</p>
+<p><strong>37、运行时异常与一般异常有何异同</strong><br>答：异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常<br>见运行错误。 java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行<br>时异常。</p>
+<p><strong>38、说出ArrayList,Vector, LinkedList的存储性能和特性</strong><br>答：ArrayList和Vector都是使用数组方式存储数据，此数组元素数大于实际存储的数据以便增加和插入元素，它们都允许直接按序号索引元素，但是插入元素要涉及数组元素移动等内存操作，所以索引数据快而插入数据慢， Vector由于使用了synchronized方法（线程安全），通常性能上较ArrayList差，而LinkedList使用双向链表实现存储，按序号索引数据需要进行前向或后向遍历，但是插入数据时只需要记录本项的前后项即可，所以插入速度较快。</p>
+<p><strong>39、 HashMap和Hashtable的区别</strong><br>答：HashMap是Hashtable的轻量级实现（非线程安全的实现），他们都完成了Map接口，主要区别在于HashMap允许（null）键值（key） ,由于非线程安全，效率上可能高于Hashtable。HashMap允许将null作为一个entry的key或者value，而Hashtable不允许。HashMap把Hashtable的contains方法去掉了，改成containsvalue和containsKey。因为contains方法容易让人引起误解<br>。Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现。最大的不同是， Hashtable的方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的方法实现同步，而HashMap 就必须为之提供外同步。Hashtable和HashMap采用的hash&#x2F;rehash算法都大概一样，所以性能不会有很大的差异。</p>
+<p><strong>40、 heap和stack有什么区别</strong><br>答：栈是一种线形集合，其添加和删除元素的操作应在同一段完成。栈按照后进先出的方式进行处理。堆是栈的一个组成元素</p>
+<p><strong>41、 Java的接口和C++的虚类的相同和不同处</strong><br>答： 由于Java不支持多继承，而有可能某个类或对象要使用分别在几个类或对象里面的方法或属性，现有的单继承机制就不能满足要求。与继承相比，接口有更高的灵活性，因为接口中没有任何实现代码。当一个类实现了接口以后，该类要实现接口里面所有的方法和属性，并且接口里面的属性在默认状态下面都是public static,所有方法默认情况下是public.一个类可以实现多个接口。</p>
+<p><strong>42、 Java中的异常处理机制的简单原理和应用</strong><br>答：当JAVA程序违反了JAVA的语义规则时， JAVA虚拟机就会将发生的错误表示为一个异常。违反语义规则包括2种情况<br>。一种是JAVA类库内置的语义检查。例如数组下标越界,会引发IndexOutOfBoundsException;访问null的对象时会引发N<br>ullPointerException。另一种情况就是JAVA允许程序员扩展这种语义检查，程序员可以创建自己的异常，并自由选择<br>在何时用throw关键字引发异常。所有的异常都是java.lang.Thowable的子类。</p>
+<p><strong>43、垃圾回收的优点和原理。并考虑2种回收机制</strong><br>答：Java语言中一个显著的特点就是引入了垃圾回收机制，使c++程序员最头疼的内存管理的问题迎刃而解，它使得Java程序员在编写程序的时候不再需要考虑内存管理。由于有个垃圾回收机制， Java中的对象不再有”作用域”的概念，只有对象的引用才有”作用域”。垃圾回收可以有效的防止内存泄露，有效的使用可以使用的内存。垃圾回收器通常是作为一个单独的低级别的线程运行，不可预知的情况下对内存堆中已经死亡的或者长时间没有使用的对象进行清楚和回收，程序员不能实时的调用垃圾回收器对某个对象或所有对象进行垃圾回收。回收机制有分代复制垃圾回收和标记垃圾回收，增量垃圾回收。</p>
+<p><strong>44、你所知道的集合类都有哪些？主要方法？</strong><br>答：最常用的集合类是 List 和 Map。 List 的具体实现包括 ArrayList 和 Vector，它们是可变大小的列表，比较适合构建、存储和操作任何类型对象的元素列表。 List 适用于按数值索引访问元素的情形。Map 提供了一个更通用的元素存储方法。 Map 集合类用于存储元素对（称作”键”和”值”），其中每个键映射到一个值</p>
+<p><strong>45、描述一下JVM加载class文件的原理机制?</strong><br>答：JVM中类的装载是由ClassLoader和它的子类来实现的,Java ClassLoader 是一个重要的Java运行时系统组件。它负责在运行时查找和装入类文件的类。</p>
+<p><strong>46、一个”.java”源文件中是否可以包括多个类（不是内部类）？有什么限制？</strong><br>答：可以。必须只有一个类名与文件名相同。</p>
+<p><strong>47、 java中有几种类型的流？ JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类？</strong><br>答：字节流，字符流。字节流继承于InputStream OutputStream，字符流继承于InputStreamReader OutputStreamWriter。java.io包中还有许多其他的流，主要是为了提高性能和使用方便。</p>
+<p><strong>48、java中会存在内存泄漏吗，请简单描述。</strong><br>答：会。自己实现堆载的数据结构时有可能会出现内存泄露，可参看effective java.</p>
+<p><strong>49、 java中实现多态的机制是什么？</strong><br>答： 方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性的一种表现。</p>
+<p><strong>50、垃圾回收器的基本原理是什么？垃圾回收器可以马上回收内存吗？有什么办法主动通知虚拟机进行垃圾回收</strong><br>答：对于GC来说，当程序员创建对象时， GC就开始监控这个对象的地址、大小以及使用情况。通常， GC采用有向图的方式记录和管理堆(heap)中的所有对象。通过这种方式确定哪些对象是”可达的”，哪些对象是”不可达的”。当GC确定一些对象为”不可达”时， GC就有责任回收这些内存空间。可以。程序员可以手动执行System.gc()，通知GC运行，但是Java语言规范并不保证GC一定会执行。</p>
+<p><strong>51、静态变量和实例变量的区别？</strong><br>答：static i &#x3D; 10; &#x2F;&#x2F;常量 class A a; a.i &#x3D;10;&#x2F;&#x2F;可变</p>
+<p><strong>52、什么是java序列化，如何实现java序列化？</strong><br>答：序列化就是一种用来处理对象流的机制，所谓对象流也就是将对象的内容进行流化。可以对流化后的对象进行读写<br>操作，也可将流化后的对象传输于网络之间。序列化是为了解决在对对象流进行读写操作时所引发的问题。序列化的实现：将需要被序列化的类实现Serializable接口，该接口没有需要实现的方法， implements Serializable只是为了标注该对象是可被序列化的，然后使用一个输出流(如： FileOutputStream)来构造一个ObjectOutputStream(对象流)对象，接着，使ObjectOutputStream对象的writeObject(Object obj)方法就可以将参数为obj的对象写出(即保存其状态)，要恢复的话则用输入流。</p>
+<p><strong>53、是否可以从一个static方法内部发出对非static方法的调用？</strong><br>答：不可以,如果其中包含对象的method()；不能保证对象初始化.</p>
+<p><strong>54、写clone()方法时，通常都有一行代码，是什么？</strong><br>答：Clone 有缺省行为， super.clone();他负责产生正确大小的空间，并逐位复制。</p>
+<p><strong>57、在JAVA中，如何跳出当前的多重嵌套循环？</strong><br>答：用break; return 方法。</p>
+<p><strong>58、 List、 Map、 Set三个接口，存取元素时，各有什么特点？</strong><br>答：List 以特定次序来持有元素，可有重复元素。 Set 无法拥有重复元素,内部排序。 Map 保存keyvalue值， value可多值</p>
+<p><strong>59、说出一些常用的类，包，接口，请各举5个</strong><br>答：常用的类： BufferedReader BufferedWriter FileReader FileWirter String Integer<br>       常用的包： java.lang java.awt java.io java.util java.sql<br>       常用的接口： Remote List Map Document NodeList</p>
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/8.js?i=58cydkuoizw&amp;m=0&amp;c=ff0000&amp;cr1=ffffff&amp;f=arial&amp;l=33" async="async"></script>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://leewangwang.github.io">Josh Lee</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://leewangwang.github.io/2018/12/26/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Java%E7%AC%94%E8%AF%95%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B/">https://leewangwang.github.io/2018/12/26/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Java%E7%AC%94%E8%AF%95%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://leewangwang.github.io" target="_blank">The path of Learning</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2018/12/27/IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%A4%A7%E5%85%A8/" title="IDEA常用快捷键大全"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">IDEA常用快捷键大全</div></div><div class="info-2"><div class="info-item-1">初学者常用的已经用红色的标记了 Alt+Insert，可以生成构造器&#x2F;Getter&#x2F;Setter等。 Ctrl+N，可以快速打开类   Ctrl+R，替换文本   Ctrl+F，查找文本   Ctrl+X，删除行   Ctrl+D，复制行   Ctrl+O，重写方法   Ctrl+I，实现方法   Ctrl+Y，删除当前行   Shift+Enter，向下插入新行   Ctrl+Shift+F，全局查找   Ctrl+”+&#x2F;-”，当前方法展开、折叠   Ctrl+Shift+”+&#x2F;-”，全部展开、折叠   Ctrl+Enter，上插一行   Ctrl+Shift + Enter，语句完成 “！”，否定完成，输入表达式时按 “！”键 Ctrl+E，最近的文件 Ctrl+Shift+E，最近更改的文件 Shift+Click，可以关闭文件 Ctrl+[ OR ]，可以跑到大括号的开头与结尾 Ctrl+F7，可以查询当前元素在当前文件中的引用，然后按 F3...</div></div></div></a><a class="pagination-related" href="/2018/11/21/%E4%BB%BB%E6%AD%A3%E9%9D%9E%E7%9A%84%E6%96%B0%E5%B9%B4%E5%85%AC%E5%BC%80%E4%BF%A1%E8%AF%BB%E5%90%8E%E6%84%9F/" title="任正非的新年公开信读后感"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">任正非的新年公开信读后感</div></div><div class="info-2"><div class="info-item-1">看完任正非的新年公开信后，作为一名软件工程专业的学生收货颇丰，文章看似是一般领导者的官方话，但是仔细看之后，任正非对于软件工程的理解确实非常深刻，各种专业术语信手拈来，比喻恰到好处。里面对于软件开发的理解、看法、建议等都很专业，不像一般的领导者一样，只会说空话。 华为从一家传统的硬件公司，靠交换机、路由器发家，一直发展到现在的软硬件同时发展的大型企业，说明华为在软件研发方面的发展方向和道路是正确的，信中这一句“二十年前的IPD变革，重构了我们的研发模式，实现了从依赖个人、偶然性推出成功产品，到制度化、持续地推出高质量产品的转变。”也证实了华为在软件研发道路的正确性。    华为在这三十年的发展中，从开始的“炮轰华为”到现在的“支持华为”，一个深深触动我的认知：“质量，是客户最基本的需求，因为它‘天经地义’、‘不言而喻’的性质。因此，它往往是客户永远不会拿来谈判的需求。但是，如果基本的质量关切得不到保障，客户最基本的需求得不到满足，则其它一切无从谈起。” 华为现在的产品和解决方案已经在 170 多个国家安全稳定运行，并因此积累和赢得了全球数万客户的信任。   ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2019/02/24/IntelliJ%20IDEA%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="IntelliJ IDEA下载安装教程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-02-24</div><div class="info-item-2">IntelliJ IDEA下载安装教程</div></div><div class="info-2"><div class="info-item-1">1 官网下载网址：https://www.jetbrains.com/idea/  选择Download，Mac和Windows按照自己的需求选择，一般使用社区免费版即可  下载可能需要注册，不需要理会，等待下载界面出来就行了 2 安装IDEA双击下载好的ideaIU-2018.3.4.exe文件（ideaIU-2022.2.3.dmg），选择next  Windows电脑需要自定义设置安装目录，Mac电脑的话无需设置目录，一直下一步即可  按照下面的勾选就行了  点击install，等待安装成功就行了   </div></div></div></a><a class="pagination-related" href="/2019/01/02/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Java%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%E6%A6%82%E5%BF%B5/" title="java基础——Java分层架构概念"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-02</div><div class="info-item-2">java基础——Java分层架构概念</div></div><div class="info-2"><div class="info-item-1">service是业务层DAO (Data Access Object) 数据访问   1.JAVA中Action层, Service层 ，modle层 和 Dao层的功能区分？（下面所描述的service层就是biz） 首先这是现在最基本的分层方式，结合了SSH架构。modle层就是对应的数据库表的实体类。 Dao层是使用了Hibernate连接数据库、操作数据库（增删改查）。 以上的Hibernate，Struts，都需要注入到Spring的配置文件中，Spring把这些联系起来，成为一个整体 其他答案： action 是业务层的一部分，是一个管理器 （总开关）（作用是取掉转）（取出前台界面的数据，调用biz方法，转发到下一个action或者页面）模型成（model）一般是实体对象(把现实的的事物变成java中的对象)作用是一暂时存储数据方便持久化（存入数据库或者写入文件）而是 作为一个包裹封装一些数据来在不同的层以及各种java对象中使用   dao是数据访问层  就是用来访问数据库实现数据的持久化（把内存中的数据永久保存到硬盘中） 其他答案：Action是一个控制器...</div></div></div></a><a class="pagination-related" href="/2018/09/18/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94final%E5%85%B3%E9%94%AE%E5%AD%97%E8%AF%A6%E8%A7%A3/" title="Java基础——final关键字详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-18</div><div class="info-item-2">Java基础——final关键字详解</div></div><div class="info-2"><div class="info-item-1">Java语言基础之final  final是一个修饰符，可以修饰类、方法、变量 final修饰的类无法继承 final修饰的方法无法被重写 final修饰的局部变量，一旦赋值，不可再改变 final修饰的成员变量必须手动初始化，或者构造方法完成之前 final修饰的成员变量一般与static联用  例：public static final double PI &#x3D; 3.14;  所有的常量必须大写 其实这样的原因的就是给一些固定的数据起个阅读性较强的名称。 不加 final 修饰不是也可以使用吗？ 那么这个值是一个变量，是可以更改的。加了 final，程序更为严谨。常量名称定义时，有规范，所有字母都大写，如果由多个单词组成，中间用 _连接。 public class A &#123;		final int a;		public A()&#123;		a = 10;	&#125;		public final void m1() &#123;		final int i = 100;		//不能重新赋值		//i = 100;	&#125;;&#125;/*class B...</div></div></div></a><a class="pagination-related" href="/2018/09/22/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94super%E5%85%B3%E9%94%AE%E5%AD%97/" title="Java基础——super关键字"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-22</div><div class="info-item-2">Java基础——super关键字</div></div><div class="info-2"><div class="info-item-1">1 super关键字的概念 super不是引用类型，存储的不是内存地址，指向不是父类对象  super代表的市当前子类对象中的父类型特征   2 super什么时候用？ 子类和父类都有某个数据 在子类中访问父类属性时  3 super可以用在什么地方？ 可以用在成员方法中，不能用在静态方法中  可以用在构造方法中   super();用在构造方法中 ​	语法：super(实参); 如果第一行没有super();或this();系统会默认调用super(); super();和this();只能用在第一行，故不能共存 super();通过子类的构造方法去调用父类的构造方法，不会创建对象 ​	作用：给当前子类对象中的父类型特征赋值    在Java语言中只要创建对象，那么Object中的无参数构造方法一定会被执行 看下面两个例子 例1 创建两个类，通过子类继承父类，在子类中调用父类方法，来观察super();的用法。 1.父类：Account 2.子类：DebitAccount //“员工”父类：提供方法和属性class Employee &#123;	String name =...</div></div></div></a><a class="pagination-related" href="/2018/09/20/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94this%E5%85%B3%E9%94%AE%E5%AD%97/" title="Java基础——this关键字"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-20</div><div class="info-item-2">Java基础——this关键字</div></div><div class="info-2"><div class="info-item-1">1 this是什么？ this是一个引用类型 在堆中的每一个对象都有this this保存内存地址只指向自身   2 this能用在什么地方2.1 this可以用在成员方法中 谁去调用这个成员方法，this就代表谁 this指的就是当前对象（“this.”可以省略）  public class ThisTest_01 &#123;	public static void main(String[] args) &#123; 		//创建对象		Employee e1 = new Employee(123,&quot;zhangsan&quot;);		e1.work();				//创建对象		Employee e2 = new Employee(456,&quot;lisi&quot;);		e2.work();		e1.m1();	&#125;&#125; class Employee&#123;	//员工编号	int empno;	//员工姓名	String name;	//C0nstructor(无参数构造方法)	Employee()...</div></div></div></a><a class="pagination-related" href="/2018/09/24/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%A6%82%E5%BF%B5%E5%8F%8A%E7%89%B9%E7%82%B9/" title="Java基础——抽象类的概念及特点"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-24</div><div class="info-item-2">Java基础——抽象类的概念及特点</div></div><div class="info-2"><div class="info-item-1">1.如何定义抽象类、抽象方法 ​	abstract关键字修饰 2.抽象类无法被实例化 ​	因为它不是具体的类。（但是有构造方法） 3.抽象类有构造方法，是给子类创建对象的 4.抽象类中可以定义抽象方法 ​	语法：在方法的修饰列表中添加abstract关键字，并且以“;”结束，不能带有“{}”​	public abstract void...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Josh Lee</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/hello-world/" title="Hello World">Hello World</a><time datetime="2024-12-22T12:48:53.810Z" title="发表于 2024-12-22 20:48:53">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/%E5%85%A5%E8%81%8C%E6%97%A5%E8%AE%B0/" title="入职日记">入职日记</a><time datetime="2024-12-22T10:19:42.000Z" title="发表于 2024-12-22 18:19:42">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/22/README/" title="无标题">无标题</a><time datetime="2024-12-22T09:39:39.322Z" title="发表于 2024-12-22 17:39:39">2024-12-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E2%80%94%E2%80%94%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/" title="面试记录——面试问题">面试记录——面试问题</a><time datetime="2023-04-03T01:59:41.000Z" title="发表于 2023-04-03 09:59:41">2023-04-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/03/%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%97%A5%E5%BF%97%E5%BA%8F%E5%88%97%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/" title="基于深度学习的日志序列异常检测">基于深度学习的日志序列异常检测</a><time datetime="2023-04-03T01:27:24.000Z" title="发表于 2023-04-03 09:27:24">2023-04-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Josh Lee</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
